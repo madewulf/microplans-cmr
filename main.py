@@ -9,7 +9,7 @@ import locale
 from staticmap import StaticMap, CircleMarker, StaticMap, Line, Polygon
 from haversine import haversine
 from jinja2 import Undefined, Template
-
+import random
 
 server = "https://iaso.bluesquare.org"
 forms_endpoint = server + "/api/forms/"
@@ -18,7 +18,7 @@ instances_endpoint = server + "/api/instances/"
 
 class SilentUndefined(Undefined):
     def _fail_with_undefined_error(self, *args, **kwargs):
-        return ''
+        return ""
 
 
 def get_headers():
@@ -51,13 +51,9 @@ headers = get_headers()
 
 
 def get_as_info(as_id):
-    # request form data
+    # request AS data and the relevant submissions
     data = {}
-    r = requests.get(
-        "https://iaso.bluesquare.org/api/forms/?fields=id,name,label_keys,period_type,org_unit_type_ids",
-        headers=headers,
-    )
-    data["forms"] = r.json()
+
     r = requests.get(
         "https://iaso.bluesquare.org/api/orgunits/%d/" % as_id, headers=headers
     )
@@ -69,25 +65,20 @@ def get_as_info(as_id):
         headers=headers,
     )
     data["forms"] = r.json()
+
+    # Handling fosas and their reference form
+    ##########################################
     r = requests.get(
         "https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=207"
         % as_id,
         headers=headers,
     )
-    data["fosas"] = r.json()["orgunits"]
-    as_dict = {}
-    for i in data["fosas"]:
-        file_content =  i.get("file_content")
-        print(file_content)
-        as_dict[i.get("id")] = i
-    print("as_dict", as_dict)
 
-    r = requests.get(
-        "https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=211"
-        % as_id,
-        headers=headers,
-    )
-    data["localites"] = r.json()["orgunits"]
+    data["fosas"] = r.json()["orgunits"]
+    fosa_dict = {}
+    for i in data["fosas"]:
+        fosa_dict[i.get("id")] = i
+
     r = requests.get(
         "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=735&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
         % as_id,
@@ -96,15 +87,40 @@ def get_as_info(as_id):
 
     fosa_leader_instance = None
     for i in r.json()["instances"]:
-        file_content =  i.get("file_content")
-        area_dict = as_dict[i.get("org_unit").get("id")]
-        area_dict["donnees_fosa"] = file_content
+        file_content = i.get("file_content")
+        f_dict = fosa_dict.get(i.get("org_unit").get("id"), {})
+        f_dict[
+            "donnees_fosa"
+        ] = file_content  # adding the content of the form as a field in the dictionary representing the FOSA, so that I can use that later in templates
         if file_content.get("leader"):
             fosa_leader_instance = i
 
-    data["donnes_fosa"] = as_dict
-
     data["fosa_leader_instance"] = fosa_leader_instance
+
+    # Handling localites and their reference form (same pattern as for FOSA
+    ##########################################
+    r = requests.get(
+        "https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=211"
+        % as_id,
+        headers=headers,
+    )
+
+    data["localites"] = r.json()["orgunits"]
+
+    localite_dict = {}
+    for i in data["localites"]:
+        localite_dict[i.get("id")] = i
+
+    r = requests.get(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=211&form_ids=734&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
+        % as_id,
+        headers=headers,
+    )
+
+    for i in r.json()["instances"]:
+        file_content = i.get("file_content")
+        l_dict = localite_dict.get(i.get("org_unit").get("id"), {})
+        l_dict["microplan"] = file_content
     return data
 
 
@@ -173,7 +189,7 @@ def write_html(data):
         date_str=date_str,
         data=data,
         count_localite=count_localite,
-        count_fosa=count_fosa
+        count_fosa=count_fosa,
     )
 
     # Write the rendered HTML to a file
@@ -185,11 +201,17 @@ def write_html(data):
 
 if __name__ == "__main__":
     as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714]
+
+    random.shuffle(as_ids)
     for as_id in as_ids:
-        data = get_as_info(as_id)
-        create_map(data)
-        path = write_html(data)
-        HTML(path).write_pdf("generated/%d.pdf" % as_id)
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        try:
+            data = get_as_info(as_id)
+            print(data.get("as").get("name"))
+            create_map(data)
+            path = write_html(data)
+            HTML(path).write_pdf(
+                "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
+            )
+        except:
+            print("failed for as nr: ", as_id)
+            

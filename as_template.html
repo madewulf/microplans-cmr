@@ -8,11 +8,13 @@
         html {
             font-size: 10px;
         }
+
         #map {
             padding-top: 10px;
             text-align: center;
         }
-        #map img{
+
+        #map img {
             max-width: 100%;
             max-height: 550px;
         }
@@ -194,19 +196,16 @@
 
         <tr>
             <th>N°</th>
-            <th>Localités (Village/Hameaux/Camps de réfugiés)</th>
-            <th>Quartiers / Blocs / Campements, etc.)</th>
+            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
             <th>Distance à la FOSA qui vaccine la plus proche.</th>
             <th>Localité de haute attention (oui/non)</th>
             <th>Raison de priorisation</th>
             <th>Population Totale</th>
             <th>Pop. Cible (9mois-59 mois)</th>
-
             <th>Marchés</th>
             <th>Ecoles primaires, maternelles et coraniques)</th>
             <th>Eglises /Mosquées</th>
             <th>Agence Voyage</th>
-            <th>TOTAL</th>
         </tr>
         </thead>
         <tbody>
@@ -215,16 +214,20 @@
             <td>{{loop.index}}</td>
             <td>{{localite.name}}</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{localite.microplan.localite_haute_tension}}</td>
+            <td>{{localite.microplan.raison_haute_attention}}</td>
+            <td>{{localite.microplan.population_denombre| int}}</td>
+            <td>{{((localite.microplan.population_polio_0_59 |int) * 0.83 )| int}}</td>
+            <td>{% for marche in localite.microplan.marche_localite%} {{marche.nom_marche}} {% endfor %}</td>
+            <td>{% for ecole in localite.microplan.ecole_primaire_publique%}
+                    {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}
+                {% endfor %}
+            </td>
+            <td>{% for eglise in localite.microplan.liste_privee%} {{eglise.nom_eglise}}-{{eglise.telephone_eglise}} {%
+                endfor %}
+            </td>
+            <td>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
