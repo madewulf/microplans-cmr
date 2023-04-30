@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Report</title>
+    <style>
+        /* Set full width for the map */
+        html {
+            font-size: 10px;
+        }
+        #map {
+            padding-top: 10px;
+            text-align: center;
+        }
+        #map img{
+            max-width: 100%;
+            max-height: 550px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            height: 120px;
+            padding: 20px;
+        }
+
+        .box {
+            width: 150px;
+            height: 100px;
+            font-size: 0.9em;
+            text-align: center
+        }
+
+        .mainTitle {
+            padding: 1px 0px;
+            text-align: center;
+        }
+
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 2px 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: darkred;
+            color: white;
+        }
+
+        @media print {
+            @page landscape {
+                size: landscape;
+            }
+
+            .landscape {
+                page: landscape;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="page1">
+    <div class="container">
+        <div class="box">
+            REPUBLIQUE DU CAMEROUN <br/>
+            Paix – Travail - Patrie <br/>
+            ---------------<br/>
+            MINISTERE DE LA SANTE PUBLIQUE<br/>
+            ------------------<br/>
+            PROGRAMME ELARGI DE VACCINATION<br/>
+            ------------------
+        </div>
+        <div class="box">
+            <img src="references/logo.png" style="width:100px">
+        </div>
+        <div class="box">
+            REPUBLIC OF CAMEROON<br/>
+            Peace – Work – Fatherland<br/>
+            ---------------<br/>
+            MINISTRY OF PUBLIC HEALTH <br/>
+            ------------------<br/>
+            EXPANDED PROGRAMME ON IMMUNIZATION<br/>
+            ------------------
+        </div>
+
+    </div>
+    <div style="background-color: darkred; color:white;" class="mainTitle"><h4>CAMPAGNE DE VACCINATION CONTRE LA
+        ROUGEOLE ET RUBEOLE MAI 2023</h4></div>
+    <div class="mainTitle"><h4>MICROPLAN</h4></div>
+    <div>
+
+        <table>
+            <tr>
+                <td style="text-align: right;">Date de mise à jour</td>
+                <td><strong>{{ date_str }}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Région</td>
+                <td><strong>{{data.as.parent.parent.name}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">District</td>
+                <td><strong>{{data.as.parent.name}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Aire de santé</td>
+                <td><strong>{{data.as.name}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">FORMATION SANITAIRE LEADER</td>
+                <td><strong></strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NOM DU RESPONSABLE DE L'AIRE DE SANTE</td>
+                <td><strong></strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">CONTACT DU RESPONSABLE DE L'AIRE</td>
+                <td><strong></strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NOMBRE DE FORMATION SANITAIRE</td>
+                <td><strong>{{count_fosa}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NOMBRE DE LOCALITES DANS L'AIRE DE SANTE</td>
+                <td><strong>{{count_localite}}</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">DISTANCE DE LA FORMATION SANITAIRE LEADER AU SERVICE SANTÉ DE DISTRICT
+                    (km)
+                </td>
+                <td><strong></strong></td>
+            </tr>
+        </table>
+    </div>
+    <div id="map">
+        <img src="{{ image_path }}">
+    </div>
+</div>
+<div class="page-break"></div>
+<div id="page2">
+    <h4>Formations Sanitaires</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>FORMATION SANITAIRE</th>
+            <th>Distance par rapport à ka FOSA leader</th>
+            <th>Catégorie</th>
+            <th>Type</th>
+            <th>Offre les services de vaccination (Oui/Non)</th>
+            <th>Nom du Responsable</th>
+            <th>Tel contact</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fosa in data.fosas %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{fosa.name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div id="page3" class="landscape">
+    <h4>Localités</h4>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="8"></th>
+            <th colspan="5">Lieux regroupement</th>
+        </tr>
+        </thead>
+        <thead>
+
+        <tr>
+            <th>N°</th>
+            <th>Localités (Village/Hameaux/Camps de réfugiés)</th>
+            <th>Quartiers / Blocs / Campements, etc.)</th>
+            <th>Distance à la FOSA qui vaccine la plus proche.</th>
+            <th>Localité de haute attention (oui/non)</th>
+            <th>Raison de priorisation</th>
+            <th>Population Totale</th>
+            <th>Pop. Cible (9mois-59 mois)</th>
+
+            <th>Marchés</th>
+            <th>Ecoles primaires, maternelles et coraniques)</th>
+            <th>Eglises /Mosquées</th>
+            <th>Agence Voyage</th>
+            <th>TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for localite in data.localites %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{localite.name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
