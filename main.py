@@ -6,7 +6,8 @@ import json
 from jinja2 import Environment, FileSystemLoader
 from datetime import date
 import locale
-
+from staticmap import StaticMap, CircleMarker, StaticMap, Line, Polygon
+from haversine import haversine
 server = "https://iaso.bluesquare.org"
 forms_endpoint = server + "/api/forms/"
 instances_endpoint = server + "/api/instances/"
@@ -75,8 +76,46 @@ def get_as_info(as_id):
     return data
 
 
-def write_html(data):
+def create_map(data):
     as_id = data.get("as").get("id")
+    m = StaticMap(1400, 1200, padding_x=-200, padding_y=-200)
+    coordinates = (
+        data.get("as")
+        .get("geo_json")
+        .get("features")[0]
+        .get("geometry")
+        .get("coordinates")[0][0]
+    )
+    polygon = Polygon(coordinates, "#0000FF22", "#0066CC", True)
+    m.add_polygon(polygon)
+
+    for fosa in data.get("fosas"):
+        latitude = fosa.get("latitude")
+        longitude = fosa.get("longitude")
+
+        if latitude and longitude:
+            marker = CircleMarker(
+                (longitude, latitude), "#E53834", 12, name=fosa.get("name")
+            )
+            m.add_marker(marker)
+
+    for localite in data.get("localites"):
+        latitude = localite.get("latitude")
+        longitude = localite.get("longitude")
+
+        if latitude and longitude:
+            marker = CircleMarker(
+                (longitude, latitude), "#00897B", 12, name=localite.get("name")
+            )
+            m.add_marker(marker)
+
+    image = m.render()
+    image.save("generated/images/%d.png" % as_id)
+
+
+def write_html(data):
+    area = data.get("as")
+    as_id = area.get("id")
     # Load the Jinja2 template from a separate file
     env = Environment(loader=FileSystemLoader("."))
     template = env.get_template("as_template.html")
@@ -85,13 +124,26 @@ def write_html(data):
     image_path = "images/%d.png" % as_id
 
     # Render the template with the image path
-    locale.setlocale(locale.LC_TIME, 'fr_FR')
+    locale.setlocale(locale.LC_TIME, "fr_FR")
     today = date.today()
-    date_str = today.strftime('%A %d %B %Y')
-    print(json.dumps(data.get("as"), indent=2))
+    date_str = today.strftime("%A %d %B %Y")
+    # print(json.dumps(data.get("as"), indent=2))
     count_localite = len(data.get("localites"))
     count_fosa = len(data.get("fosas"))
-    html = template.render(image_path=image_path, date_str=date_str, data=data, count_localite=count_localite,count_fosa=count_fosa )
+
+    # latitude_area, longitude_area = area.get("latitude"), area.get("longitude")
+    # district = area.get("parent")
+    # latitude_district, longitude_district = district.get("latitude"), district.get("longitude")
+    # distance_district = haversine(latitude_area, longitude_area, latitude_district, longitude_district)
+    # print("distance_district", distance_district)
+    
+    html = template.render(
+        image_path=image_path,
+        date_str=date_str,
+        data=data,
+        count_localite=count_localite,
+        count_fosa=count_fosa,
+    )
 
     # Write the rendered HTML to a file
     path = "generated/%d.html" % as_id
@@ -101,8 +153,11 @@ def write_html(data):
 
 
 if __name__ == "__main__":
-    as_id = 1051335 #1049730 #1050055 #1053714
-    data = get_as_info(as_id)
-    path = write_html(data)
-    HTML(path).write_pdf("generated/%d.pdf" % as_id)
+    as_ids = [1049730, 1051335, 1050055, 1053714]
+    for as_id in as_ids:
+        data = get_as_info(as_id)
+        create_map(data)
+        path = write_html(data)
+        HTML(path).write_pdf("generated/%d.pdf" % as_id)
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
