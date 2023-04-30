@@ -118,15 +118,15 @@
             </tr>
             <tr>
                 <td style="text-align: right;">FORMATION SANITAIRE LEADER</td>
-                <td><strong></strong></td>
+                <td><strong>{{data.fosa_leader_instance.org_unit.name}}</strong></td>
             </tr>
             <tr>
                 <td style="text-align: right;">NOM DU RESPONSABLE DE L'AIRE DE SANTE</td>
-                <td><strong></strong></td>
+                <td><strong>{{data.fosa_leader_instance.file_content.responsable_fosa}}</strong></td>
             </tr>
             <tr>
                 <td style="text-align: right;">CONTACT DU RESPONSABLE DE L'AIRE</td>
-                <td><strong></strong></td>
+                <td><strong>{{data.fosa_leader_instance.file_content.tel_responsable_fosa}}</strong></td>
             </tr>
             <tr>
                 <td style="text-align: right;">NOMBRE DE FORMATION SANITAIRE</td>
@@ -169,12 +169,12 @@
         <tr>
             <td>{{loop.index}}</td>
             <td>{{fosa.name}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{fosa.donnees_fosa.distance_fosa_ssd}}</td>
+            <td>{{fosa.donnees_fosa.type_acces_ssd}}</td>
+            <td>{{fosa.donnees_fosa.statut_fosa}}</td>
+            <td>{{fosa.donnees_fosa.fosa_vaccine}}</td>
+            <td>{{fosa.donnees_fosa.responsable_fosa}}</td>
+            <td>{{fosa.donnees_fosa.tel_responsable_fosa}}</td>
         </tr>
         {% endfor %}
         </tbody>
