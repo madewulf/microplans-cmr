@@ -52,12 +52,12 @@ def get_headers():
 headers = get_headers()
 
 
-def access_and_cache(url, use_cache = True):
+def access_and_cache(url, use_cache=True):
     m = hashlib.sha256(url.encode("UTF-8")).hexdigest()
     path = "cache/%s" % m
 
     if exists(path):
-        print("using cache!")
+        # print("using cache!")
         f = open(path, "rt")
         res = json.loads(f.read())
         f.close()
@@ -77,25 +77,32 @@ def access_and_cache(url, use_cache = True):
 def get_as_info(as_id):
     # request AS data and the relevant submissions
     data = {}
-    data["as"] = access_and_cache("https://iaso.bluesquare.org/api/orgunits/%d/" % as_id)
+    data["as"] = access_and_cache(
+        "https://iaso.bluesquare.org/api/orgunits/%d/" % as_id
+    )
     reference_instance_id = data["as"]["reference_instance_id"]
 
-    data["forms"] = access_and_cache("https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false"
-        % reference_instance_id)
-
+    data["forms"] = access_and_cache(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false"
+        % reference_instance_id
+    )
 
     # Handling fosas and their reference form
     ##########################################
 
-    data["fosas"] = access_and_cache("https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=207"
-        % as_id)["orgunits"]
+    data["fosas"] = access_and_cache(
+        "https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=207"
+        % as_id
+    )["orgunits"]
     fosa_dict = {}
     for i in data["fosas"]:
         fosa_dict[i.get("id")] = i
 
     fosa_leader_instance = None
-    instances = access_and_cache("https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=735&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
-        % as_id)["instances"]
+    instances = access_and_cache(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=735&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
+        % as_id
+    )["instances"]
     for i in instances:
         file_content = i.get("file_content")
         f_dict = fosa_dict.get(i.get("org_unit").get("id"), {})
@@ -110,20 +117,24 @@ def get_as_info(as_id):
     # Handling localites and their reference form (same pattern as for FOSA
     ##########################################
 
-    data["localites"] = access_and_cache("https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=211"
-        % as_id)["orgunits"]
+    data["localites"] = access_and_cache(
+        "https://iaso.bluesquare.org/api/orgunits/?validation_status=VALID&orgUnitParentId=%d&onlyDirectChildren=true&limit=1000&order=name&page=1&orgUnitTypeId=211"
+        % as_id
+    )["orgunits"]
 
     localite_dict = {}
     for i in data["localites"]:
         localite_dict[i.get("id")] = i
 
-    instances = access_and_cache("https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=211&form_ids=734&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
-        % as_id)["instances"]
+    instances = access_and_cache(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=211&form_ids=734&limit=200&order=-updated_at&page=1&showDeleted=false&orgUnitParentId=%d"
+        % as_id
+    )["instances"]
     for i in instances:
         file_content = i.get("file_content")
         l_dict = localite_dict.get(i.get("org_unit").get("id"), {})
         l_dict["microplan"] = file_content
-        #print(json.dumps(file_content, indent=2))
+        # print(json.dumps(file_content, indent=2))
     return data
 
 
@@ -193,6 +204,7 @@ def write_html(data):
         data=data,
         count_localite=count_localite,
         count_fosa=count_fosa,
+        range_20=list(range(1, 20)),
     )
 
     # Write the rendered HTML to a file
@@ -203,16 +215,17 @@ def write_html(data):
 
 
 if __name__ == "__main__":
-    #as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
+    # as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
     from as_ids import as_ids
+
     random.shuffle(as_ids)
-    #as_ids = [1053203]
-    as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
+    as_ids = [1053203]
+    # as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
     for as_id in as_ids:
         #try:
             data = get_as_info(as_id)
-            print(data.get("as").get("name"))
-            #create_map(data)
+            print(as_id, data.get("as").get("name"))
+            # create_map(data)
             path = write_html(data)
             HTML(path).write_pdf(
                 "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
