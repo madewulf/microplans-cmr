@@ -221,33 +221,33 @@
             <td>{% for marche in localite.microplan.marche_localite%} {{marche.nom_marche}} {% endfor %}</td>
             <td>
                 {% for ecole in localite.microplan.ecole_primaire_publique%}
-                    {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}
+                    {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_maternel_publique%}
-                    {{ecole.nom_ecole_maternel_publique}}-{{ecole.contact_ecole_maternel_publique}}-{{ecole.responsible_ecole_maternel_publique}}
+                    {{ecole.nom_ecole_maternel_publique}}-{{ecole.contact_ecole_maternel_publique}}-{{ecole.responsible_ecole_maternel_publique}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_primaire_privee%}
-                    {{ecole.nom_ecole_primaire_privee}}-{{ecole.contact_ecole_primaire_privee}}-{{ecole.responsible_ecole_primaire_privee}}
+                    {{ecole.nom_ecole_primaire_privee}}-{{ecole.contact_ecole_primaire_privee}}-{{ecole.responsible_ecole_primaire_privee}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_maternel_privee%}
-                    {{ecole.nom_ecole_maternel_privee}}-{{ecole.contact_ecole_maternel_privee}}-{{ecole.responsible_ecole_maternel_privee}}
+                    {{ecole.nom_ecole_maternel_privee}}-{{ecole.contact_ecole_maternel_privee}}-{{ecole.responsible_ecole_maternel_privee}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_primaire_cor%}
-                    {{ecole.nom_ecole_primaire_coran}}-{{ecole.contact_ecole_primaire_coran}}-{{ecole.responsible_ecole_primaire_coran}}
+                    {{ecole.nom_ecole_primaire_coran}}-{{ecole.contact_ecole_primaire_coran}}-{{ecole.responsible_ecole_primaire_coran}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.creche_liste%}
-                    {{ecole.nom_creche}}-{{ecole.contact_creche}}-{{ecole.responsible_creche}}
+                    {{ecole.nom_creche}}-{{ecole.contact_creche}}-{{ecole.responsible_creche}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.orphelinat_liste%}
-                    {{ecole.nom_orphelinat}}-{{ecole.contact_orphelinat}}-{{ecole.responsible_orphelinat}}
+                    {{ecole.nom_orphelinat}}-{{ecole.contact_orphelinat}}-{{ecole.responsible_orphelinat}}<br>
                 {% endfor %}
             </td>
             <td>
                 {% for eglise in localite.microplan.liste_privee%}
-                    {{eglise.nom_eglise}}-{{eglise.telephone_eglise}}
+                    {{eglise.nom_eglise}}-{{eglise.telephone_eglise}}<br>
                 {% endfor %}
                 {% for eglise in localite.microplan.liste_mosquee%}
-                    {{eglise.nom_mosquee}}-{{eglise.telephone_mosquee}}
+                    {{eglise.nom_mosquee}}-{{eglise.telephone_mosquee}}<br>
                 {% endfor %}
             </td>
             <td>
@@ -259,7 +259,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <div>Raisons de haute attention:
+    <div>Raisons de priorisation:
         <ul>
             <li>1. Nomades; Déplacés; Réfugiés</li>
             <li>2. Routine irregulier ou inexistant </li>
