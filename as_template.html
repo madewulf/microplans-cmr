@@ -205,7 +205,7 @@
             <th>Marchés</th>
             <th>Ecoles primaires, maternelles et coraniques)</th>
             <th>Eglises /Mosquées</th>
-            <th>Agence Voyage</th>
+            <th>Points de passage</th>
         </tr>
         </thead>
         <tbody>
@@ -219,19 +219,61 @@
             <td>{{localite.microplan.population_denombre| int}}</td>
             <td>{{((localite.microplan.population_polio_0_59 |int) * 0.83 )| int}}</td>
             <td>{% for marche in localite.microplan.marche_localite%} {{marche.nom_marche}} {% endfor %}</td>
-            <td>{% for ecole in localite.microplan.ecole_primaire_publique%}
+            <td>
+                {% for ecole in localite.microplan.ecole_primaire_publique%}
                     {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}
                 {% endfor %}
-            </td>
-            <td>{% for eglise in localite.microplan.liste_privee%} {{eglise.nom_eglise}}-{{eglise.telephone_eglise}} {%
-                endfor %}
+                {% for ecole in localite.microplan.ecole_maternel_publique%}
+                    {{ecole.nom_ecole_maternel_publique}}-{{ecole.contact_ecole_maternel_publique}}-{{ecole.responsible_ecole_maternel_publique}}
+                {% endfor %}
+                {% for ecole in localite.microplan.ecole_primaire_privee%}
+                    {{ecole.nom_ecole_primaire_privee}}-{{ecole.contact_ecole_primaire_privee}}-{{ecole.responsible_ecole_primaire_privee}}
+                {% endfor %}
+                {% for ecole in localite.microplan.ecole_maternel_privee%}
+                    {{ecole.nom_ecole_maternel_privee}}-{{ecole.contact_ecole_maternel_privee}}-{{ecole.responsible_ecole_maternel_privee}}
+                {% endfor %}
+                {% for ecole in localite.microplan.ecole_primaire_cor%}
+                    {{ecole.nom_ecole_primaire_coran}}-{{ecole.contact_ecole_primaire_coran}}-{{ecole.responsible_ecole_primaire_coran}}
+                {% endfor %}
+                {% for ecole in localite.microplan.creche_liste%}
+                    {{ecole.nom_creche}}-{{ecole.contact_creche}}-{{ecole.responsible_creche}}
+                {% endfor %}
+                {% for ecole in localite.microplan.orphelinat_liste%}
+                    {{ecole.nom_orphelinat}}-{{ecole.contact_orphelinat}}-{{ecole.responsible_orphelinat}}
+                {% endfor %}
             </td>
             <td>
+                {% for eglise in localite.microplan.liste_privee%}
+                    {{eglise.nom_eglise}}-{{eglise.telephone_eglise}}
+                {% endfor %}
+                {% for eglise in localite.microplan.liste_mosquee%}
+                    {{eglise.nom_mosquee}}-{{eglise.telephone_mosquee}}
+                {% endfor %}
+            </td>
+            <td>
+                {% for point in localite.microplan.passage%}
+                    {{point.point_passage}}<br>
+                {% endfor %}
             </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div>Raisons de haute attention:
+        <ul>
+            <li>1. Nomades; Déplacés; Réfugiés</li>
+            <li>2. Routine irregulier ou inexistant </li>
+            <li>3. Couverture faible des AVS precedentes</li>
+            <li>4. Episodes epidemiques (Polio, Rougeole, …)</li>
+            <li>5. Groupes refractaires a la vaccination</li>
+            <li>6. Enfants manques lors des AVS precedentes</li>
+            <li>7. Zones / Villages / Quartiers avec insecurite</li>
+            <li>8. Acces géographique très difficile</li>
+            <li>9. Nouveaux hameaux / Quartiers</li>
+            <li>10. Zone de transit normades, déplacés, réfugiés</li>
+            <li>11. Autres</li>
+        </ul></div>
 </div>
 </body>
 </html>
+

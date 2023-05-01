@@ -121,6 +121,7 @@ def get_as_info(as_id):
         file_content = i.get("file_content")
         l_dict = localite_dict.get(i.get("org_unit").get("id"), {})
         l_dict["microplan"] = file_content
+        #print(json.dumps(file_content, indent=2))
     return data
 
 
@@ -200,8 +201,8 @@ def write_html(data):
 
 
 if __name__ == "__main__":
-    as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714]
-
+    #as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714]
+    from as_ids import as_ids
     random.shuffle(as_ids)
     for as_id in as_ids:
         try:
@@ -214,4 +215,3 @@ if __name__ == "__main__":
             )
         except:
             print("failed for as nr: ", as_id)
-            
