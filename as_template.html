@@ -14,11 +14,14 @@
             text-align: center;
         }
 
-        #map img {
+        #map  img {
             max-width: 100%;
             max-height: 550px;
         }
-
+        #map2 img {
+            max-width: 100%;
+            max-height: 600px;
+        }
         .container {
             display: flex;
             justify-content: space-between;
@@ -382,6 +385,12 @@
         {% endfor %}
         </tbody>
    </table>
+</div>
+<div id="page6" class="landscape">
+   <h4> OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
+       <div id="map2">
+        <img src="{{ image_path }}">
+    </div>
 </div>
 </body>
 </html>
