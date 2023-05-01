@@ -184,7 +184,7 @@
 </div>
 
 <div id="page3" class="landscape">
-    <h4>Localités</h4>
+    <h4>OUTIL 1b: LISTE DES LOCALITES</h4>
     <table>
         <thead>
         <tr>
@@ -221,38 +221,38 @@
             <td>{% for marche in localite.microplan.marche_localite%} {{marche.nom_marche}} {% endfor %}</td>
             <td>
                 {% for ecole in localite.microplan.ecole_primaire_publique%}
-                    {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}<br>
+                {{ecole.nom_ecole_primaire_publique}}-{{ecole.contact_ecole_primaire_publique}}-{{ecole.responsible_ecole_primaire_publique}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_maternel_publique%}
-                    {{ecole.nom_ecole_maternel_publique}}-{{ecole.contact_ecole_maternel_publique}}-{{ecole.responsible_ecole_maternel_publique}}<br>
+                {{ecole.nom_ecole_maternel_publique}}-{{ecole.contact_ecole_maternel_publique}}-{{ecole.responsible_ecole_maternel_publique}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_primaire_privee%}
-                    {{ecole.nom_ecole_primaire_privee}}-{{ecole.contact_ecole_primaire_privee}}-{{ecole.responsible_ecole_primaire_privee}}<br>
+                {{ecole.nom_ecole_primaire_privee}}-{{ecole.contact_ecole_primaire_privee}}-{{ecole.responsible_ecole_primaire_privee}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_maternel_privee%}
-                    {{ecole.nom_ecole_maternel_privee}}-{{ecole.contact_ecole_maternel_privee}}-{{ecole.responsible_ecole_maternel_privee}}<br>
+                {{ecole.nom_ecole_maternel_privee}}-{{ecole.contact_ecole_maternel_privee}}-{{ecole.responsible_ecole_maternel_privee}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.ecole_primaire_cor%}
-                    {{ecole.nom_ecole_primaire_coran}}-{{ecole.contact_ecole_primaire_coran}}-{{ecole.responsible_ecole_primaire_coran}}<br>
+                {{ecole.nom_ecole_primaire_coran}}-{{ecole.contact_ecole_primaire_coran}}-{{ecole.responsible_ecole_primaire_coran}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.creche_liste%}
-                    {{ecole.nom_creche}}-{{ecole.contact_creche}}-{{ecole.responsible_creche}}<br>
+                {{ecole.nom_creche}}-{{ecole.contact_creche}}-{{ecole.responsible_creche}}<br>
                 {% endfor %}
                 {% for ecole in localite.microplan.orphelinat_liste%}
-                    {{ecole.nom_orphelinat}}-{{ecole.contact_orphelinat}}-{{ecole.responsible_orphelinat}}<br>
+                {{ecole.nom_orphelinat}}-{{ecole.contact_orphelinat}}-{{ecole.responsible_orphelinat}}<br>
                 {% endfor %}
             </td>
             <td>
                 {% for eglise in localite.microplan.liste_privee%}
-                    {{eglise.nom_eglise}}-{{eglise.telephone_eglise}}<br>
+                {{eglise.nom_eglise}}-{{eglise.telephone_eglise}}<br>
                 {% endfor %}
                 {% for eglise in localite.microplan.liste_mosquee%}
-                    {{eglise.nom_mosquee}}-{{eglise.telephone_mosquee}}<br>
+                {{eglise.nom_mosquee}}-{{eglise.telephone_mosquee}}<br>
                 {% endfor %}
             </td>
             <td>
                 {% for point in localite.microplan.passage%}
-                    {{point.point_passage}}<br>
+                {{point.point_passage}}<br>
                 {% endfor %}
             </td>
         </tr>
@@ -262,7 +262,7 @@
     <div>Raisons de priorisation:
         <ul>
             <li>1. Nomades; Déplacés; Réfugiés</li>
-            <li>2. Routine irregulier ou inexistant </li>
+            <li>2. Routine irregulier ou inexistant</li>
             <li>3. Couverture faible des AVS precedentes</li>
             <li>4. Episodes epidemiques (Polio, Rougeole, …)</li>
             <li>5. Groupes refractaires a la vaccination</li>
@@ -272,7 +272,116 @@
             <li>9. Nouveaux hameaux / Quartiers</li>
             <li>10. Zone de transit normades, déplacés, réfugiés</li>
             <li>11. Autres</li>
-        </ul></div>
+        </ul>
+    </div>
+</div>
+<div class="page-break"></div>
+<div id="page4">
+    <h4>OUTIL 2: ANALYSE DES PROBLEMES</h4>
+    <h5>Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et Solutions Apportées</h5>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Problemes Identifies</th>
+            <th>Solutions avec Ressources Disponibles</th>
+            <th>Solutions avec Ressources Additionelles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Personnel<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Logistique<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Qualite services<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Gestion / Planification<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Supervision<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Donnees<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        <tr>
+            <td>Mobilisation Sociale<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+<div id="page5" class="landscape">
+    <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
+    <h5>3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE</h5>
+   <table>
+        <thead>
+        <tr>
+            <th colspan="6"></th>
+            <th colspan="3">Jour de mobilisation</th>
+        </tr>
+        </thead>
+        <thead>
+
+        <tr>
+            <th>N°</th>
+            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
+            <th>Population totale</th>
+            <th>Nombre de ménages à visiter</th>
+            <th>Agent mobilisateur social responsable</th>
+            <th>Nombre de jour requis</th>
+            <th>J1</th>
+            <th>J2</th>
+            <th>J3</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in range_20 %}
+        <tr>
+            <td>{{i}}<br/><br/></td><td/><td/><td/><td/><td/><td/><td/><td/>
+        </tr>
+        {% endfor %}
+        </tbody>
+   </table>
+</div>
+<div id="page5bis" class="landscape">
+    <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
+    <h5>3b: ITINERAIRE DES EQUIPES DE VACCINATION</h5>
+   <table>
+        <thead>
+        <tr>
+            <th colspan="6"></th>
+            <th colspan="5">Jour de vaccination</th>
+        </tr>
+        </thead>
+        <thead>
+
+        <tr>
+            <th>N°</th>
+            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
+            <th>Population cible</th>
+            <th>Stratégie de vaccination</th>
+            <th>Equipe de vaccination responsable</th>
+            <th>Nombre de jour requis</th>
+            <th>J1</th>
+            <th>J2</th>
+            <th>J3</th>
+            <th>J4</th>
+            <th>J5</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in range_20 %}
+        <tr>
+            <td>{{i}}<br/><br/></td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/>
+        </tr>
+        {% endfor %}
+        </tbody>
+   </table>
 </div>
 </body>
 </html>
