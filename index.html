@@ -1,0 +1,66 @@
+<html>
+<head>
+    <script
+            src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Téléchargement de Microplans</h1>
+<div>
+    <select id="regionSelect"></select>
+    <select id="districtSelect"></select>
+    <select id="areaSelect"></select>
+    <span id="link"></span>
+</div>
+</body>
+<script>
+    var regionSelect = $("#regionSelect");
+    var districtSelect = $("#districtSelect");
+    var areaSelect = $("#areaSelect");
+    var link = $("#link");
+
+    function fillSelect(select, data) {
+        $(select).empty();
+        $(select).append("<option disabled selected value> -- Choisissez -- </option>")
+        $(data.orgunits).each(function () {
+            $(select).append($("<option>").attr('value', this.id).text(this.name));
+        });
+    }
+
+    regionSelect.hide()
+    districtSelect.hide()
+    areaSelect.hide()
+    link.hide()
+
+    $.getJSON("/treesearch/?&parent_id=1049453&validation_status=VALID&ignoreEmptyNames=true", function (data) {
+
+        fillSelect("#regionSelect", data);
+        regionSelect.show();
+    });
+    regionSelect.on('change', function () {
+
+        districtSelect.hide()
+        areaSelect.hide()
+        link.hide()
+        $.getJSON("/treesearch/?&parent_id=" + this.value + "&validation_status=VALID&ignoreEmptyNames=true", function (data) {
+            fillSelect("#districtSelect", data);
+            districtSelect.show()
+
+        });
+    });
+    districtSelect.on('change', function () {
+        areaSelect.hide()
+        link.hide()
+        $.getJSON("/treesearch/?&parent_id=" + this.value + "&validation_status=VALID&ignoreEmptyNames=true", function (data) {
+            fillSelect("#areaSelect", data);
+            areaSelect.show()
+        });
+    });
+    areaSelect.on('change', function () {
+        link.html("")
+        link.append('<a href="/generate/' + this.value + '"> Télécharger Microplan PDF')
+        link.show()
+    });
+</script>
+</html>

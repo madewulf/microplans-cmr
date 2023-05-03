@@ -83,7 +83,7 @@ def get_as_info(as_id):
     data["forms"] = access_and_cache(
         "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false" % as_id
     )["instances"]
-    print(data["forms"])
+
     # Handling fosas and their reference form
     ##########################################
 
@@ -233,10 +233,10 @@ if __name__ == "__main__":
 
 from flask import Flask
 from flask import send_file
-
+from flask import request
 app = Flask(__name__)
 
-@app.route("/<int:as_id>")
+@app.route("/generate/<int:as_id>")
 def generate_microplan(as_id):
     as_id = int(as_id)
     data = get_as_info(as_id)
@@ -246,3 +246,23 @@ def generate_microplan(as_id):
     generated_path = "generated/%s" % file_name
     HTML(path).write_pdf(generated_path)
     return send_file(generated_path)
+
+@app.route("/")
+def index():
+    env = Environment(loader=FileSystemLoader("."), undefined=SilentUndefined)
+    template = env.get_template("index.html")
+    html = template.render(
+    )
+    return html
+
+@app.route("/treesearch/") #proxying treesearch
+def treesearch():
+    path = "https://iaso.bluesquare.org/api/orgunits/treesearch/?%s" % request.query_string.decode("utf-8")
+
+    r = requests.get(
+        path,
+        headers=headers,
+    )
+
+    return r.json()
+
