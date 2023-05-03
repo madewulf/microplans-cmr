@@ -4,14 +4,49 @@
             src="https://code.jquery.com/jquery-3.6.4.min.js"
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
             crossorigin="anonymous"></script>
+    <style>
+        body {
+
+            font-size: 30px;
+            font-family: sans-serif;
+        }
+
+        select {
+            height: 60px;
+            width: 600px;
+            vertical-align: middle;
+            font-size: 30px;
+        }
+
+        #link {
+            font-size: 40px;
+        }
+
+        h1 {
+            padding-top: 20px;
+        }
+
+        #container {
+            background-color: powderblue;
+            margin: auto;
+            max-width: 960px;
+            text-align: center;
+            height:100%;
+        }
+    </style>
 </head>
 <body>
-<h1>Téléchargement de Microplans</h1>
-<div>
-    <select id="regionSelect"></select>
-    <select id="districtSelect"></select>
-    <select id="areaSelect"></select>
-    <span id="link"></span>
+<div id="container">
+    <h1>Téléchargement de Microplans</h1>
+    <div>
+        <select id="regionSelect"></select>
+        <br><br>
+        <select id="districtSelect"></select>
+        <br><br>
+        <select id="areaSelect"></select>
+        <br><br>
+        <span id="link"></span>
+    </div>
 </div>
 </body>
 <script>
