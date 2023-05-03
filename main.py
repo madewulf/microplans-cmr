@@ -56,7 +56,7 @@ def access_and_cache(url, use_cache=True):
     m = hashlib.sha256(url.encode("UTF-8")).hexdigest()
     path = "cache/%s" % m
 
-    if exists(path):
+    if exists(path) and use_cache:
         # print("using cache!")
         f = open(path, "rt")
         res = json.loads(f.read())
@@ -81,9 +81,9 @@ def get_as_info(as_id):
     reference_instance_id = data["as"]["reference_instance_id"]
 
     data["forms"] = access_and_cache(
-        "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false" % reference_instance_id
-    )
-
+        "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false" % as_id
+    )["instances"]
+    print(data["forms"])
     # Handling fosas and their reference form
     ##########################################
 
@@ -131,13 +131,23 @@ def get_as_info(as_id):
         file_content = i.get("file_content")
         l_dict = localite_dict.get(i.get("org_unit").get("id"), {})
         l_dict["microplan"] = file_content
-        # print(json.dumps(file_content, indent=2))
+
+    #handling cold chain
+    instances = access_and_cache(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=740&limit=20&order=org_unit__name&page=1&showDeleted=false&orgUnitParentId=%s"
+        % as_id
+    )["instances"]
+    for i in instances:
+        file_content = i.get("file_content")
+        l_dict = fosa_dict.get(i.get("org_unit").get("id"), {})
+        l_dict["cold_chain"] = file_content
+
     return data
 
 
 def create_map(data):
     as_id = data.get("as").get("id")
-    m = StaticMap(1400, 1200, padding_x=0, padding_y=0)
+    m = StaticMap(1850, 1200, padding_x=0, padding_y=0)
     coordinates = data.get("as").get("geo_json").get("features")[0].get("geometry").get("coordinates")[0][0]
     polygon = Polygon(coordinates, "#0000FF22", "#0066CC", True)
     m.add_polygon(polygon)
@@ -207,19 +217,32 @@ if __name__ == "__main__":
     from as_ids import as_ids
 
     random.shuffle(as_ids)
-    as_ids = [1050055]
-    as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
-    as_ids = [1056570,1055603,1054022,1052936,1055718,1053703,1057757,1054619,1057601,1057793,1123965,1052822,1056824,1053160,1052047]
+    as_ids = [1053714]
+    #as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
+    #as_ids = [1056570,1055603,1054022,1052936,1055718,1053703,1057757,1054619,1057601,1057793,1123965,1052822,1056824,1053160,1052047]
     for as_id in as_ids:
-        try:
+        #try:
             data = get_as_info(as_id)
             print(as_id, data.get("as").get("name"))
-            create_map(data)
+            #create_map(data)
             if True:
                 path = write_html(data)
                 HTML(path).write_pdf("generated/%s-%d.pdf" % (data.get("as").get("name"), as_id))
-        except:
-           print("failed for as nr: ", as_id)
+        #except:
+        #   print("failed for as nr: ", as_id)
 
+from flask import Flask
+from flask import send_file
 
-1056570,1055603,1054022,1052936,1055718,1053703,1057757,1054619,1057601,1057793,1123965,1052822,1056824,1053160,1052047
+app = Flask(__name__)
+
+@app.route("/<int:as_id>")
+def generate_microplan(as_id):
+    as_id = int(as_id)
+    data = get_as_info(as_id)
+    create_map(data)
+    path = write_html(data)
+    file_name = "%s-%d.pdf" % (data.get("as").get("name"), as_id)
+    generated_path = "generated/%s" % file_name
+    HTML(path).write_pdf(generated_path)
+    return send_file(generated_path)

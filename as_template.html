@@ -14,14 +14,16 @@
             text-align: center;
         }
 
-        #map  img {
+        #map img {
             max-width: 100%;
             max-height: 550px;
         }
+
         #map2 img {
             max-width: 100%;
             max-height: 600px;
         }
+
         .container {
             display: flex;
             justify-content: space-between;
@@ -293,35 +295,86 @@
         </thead>
         <tbody>
         <tr>
-            <td>Personnel<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Personnel<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Logistique<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Logistique<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Qualite services<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Qualite services<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Gestion / Planification<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Gestion / Planification<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Supervision<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Supervision<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Donnees<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Donnees<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         <tr>
-            <td>Mobilisation Sociale<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td><td/><td/><td/>
+            <td>Mobilisation Sociale<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         </tbody>
     </table>
 
 
 </div>
+
+<div id="page4bis">
+    <h4>OUTIL 3: CARTOGRAPHIE DES PARTENAIRES ET ACTEURS DE COMMUNICATION</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>Type d'organisation</th>
+            <th>Adresse/Siège</th>
+            <th>Contact</th>
+            <th>Téléphone</th>
+            <th>Type d’appui attendu</th>
+            <th>Activités à mener pour solliciter ce support</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for form in data.forms %}
+        {% if form.form_name == "MICROPLAN - OBC"%}
+        <tr>
+            <td>{{ form.file_content.type_organisation}}</td>
+            <td>{{ form.file_content.siege}}</td>
+            <td>{{ form.file_content.responsible}}</td>
+            <td>{{ form.file_content.telephone}}</td>
+            <td/>
+            <td/>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 <div id="page5" class="landscape">
     <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
     <h5>3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE</h5>
-   <table>
+    <table>
         <thead>
         <tr>
             <th colspan="6"></th>
@@ -345,16 +398,25 @@
         <tbody>
         {% for i in range_20 %}
         <tr>
-            <td>{{i}}<br/><br/></td><td/><td/><td/><td/><td/><td/><td/><td/>
+            <td>{{i}}<br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         {% endfor %}
         </tbody>
-   </table>
+    </table>
 </div>
+
 <div id="page5bis" class="landscape">
     <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
     <h5>3b: ITINERAIRE DES EQUIPES DE VACCINATION</h5>
-   <table>
+    <table>
         <thead>
         <tr>
             <th colspan="6"></th>
@@ -380,17 +442,84 @@
         <tbody>
         {% for i in range_20 %}
         <tr>
-            <td>{{i}}<br/><br/></td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/>
+            <td>{{i}}<br/><br/></td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
         </tr>
         {% endfor %}
         </tbody>
-   </table>
+    </table>
 </div>
 <div id="page6" class="landscape">
-   <h4> OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
-       <div id="map2">
+    <h4> OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
+    <div id="map2">
         <img src="{{ image_path }}">
     </div>
+</div>
+<div id="page8" class="landscape" style="font-size:0.9em">
+    <h4>OUTIL 5. CHAINE DU FROID</h4>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th colspan="5">Requis</th>
+            <th colspan="5">Disponible</th>
+            <th colspan="5">BESOINS SUPPLEMENTAIRES</th>
+        </tr>
+        <tr>
+            <th>N°</th>
+            <th>Formation Sanitaire</th>
+            <th>Réfrigérateur</th>
+            <th>Glacière</th>
+            <th>Porte vaccin</th>
+            <th>Accumulateurs pour glacière</th>
+            <th>Accumulateurs pour porte vaccin</th>
+            <th>Réfrigérateur</th>
+            <th>Glaçière</th>
+            <th>Porte vaccin</th>
+            <th>Accumulateurs pour glacière</th>
+            <th>Accumulateurs pour porte vaccin</th>
+            <th>Réfrigérateur</th>
+            <th>Glaçière</th>
+            <th>Porte vaccin</th>
+            <th>Accumulateurs pour glacière</th>
+            <th>Accumulateurs pour porte vaccin</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fosa in data.fosas %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{fosa.name}}</td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td>{{fosa.cold_chain.qte_ecdf}}</td>
+            <td>{{fosa.cold_chain.qte_glaciere}}</td>
+            <td>{{fosa.cold_chain.qte_pv}}</td>
+            <td> {{ fosa.cold_chain.nbre_accumulateur_glaciere + fosa.cold_chain.nbre_accumulateur_pv3}}</td>
+            <!-- using nbre_accumulateur_pv3 looks like a mistake, but it's actually due to a misnamed question in the odk form -->
+            <td> {{ fosa.cold_chain.nbre_accumulateur_pv }}</td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 </div>
 </body>
 </html>
