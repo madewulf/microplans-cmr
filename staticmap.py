@@ -15,11 +15,17 @@ class Label:
         self.label_coordinates = point_coordinates
 
     def size(self):
-        return len(self.text) * 25, 40
+        return len(self.text) * 16, 25
 
     def includes(self, point):
-        return (self.label_coordinates[0] <= point[0] <= self.label_coordinates[0] + self.size()[0]) and (
-            self.label_coordinates[1] <= point[1] <= self.label_coordinates[1] + self.size()[1]
+        return (
+            self.label_coordinates[0]
+            <= point[0]
+            <= self.label_coordinates[0] + self.size()[0]
+        ) and (
+            self.label_coordinates[1]
+            <= point[1]
+            <= self.label_coordinates[1] + self.size()[1]
         )
 
     def corners(self):
@@ -43,7 +49,10 @@ class Label:
         return False
 
     def equals(self, label):
-        return self.text == label.text and self.label_coordinates == label.label_coordinates
+        return (
+            self.text == label.text
+            and self.label_coordinates == label.label_coordinates
+        )
 
 
 class Line:
@@ -180,7 +189,9 @@ def _lat_to_y(lat, zoom):
     if not (-90 <= lat <= 90):
         lat = (lat + 90) % 180 - 90
 
-    return (1 - log(tan(lat * pi / 180) + 1 / cos(lat * pi / 180)) / pi) / 2 * pow(2, zoom)
+    return (
+        (1 - log(tan(lat * pi / 180) + 1 / cos(lat * pi / 180)) / pi) / 2 * pow(2, zoom)
+    )
 
 
 def _y_to_lat(y, zoom):
@@ -311,8 +322,15 @@ class StaticMap:
         :rtype: Image.Image
         """
 
-        if not self.lines and not self.markers and not self.polygons and not (center and zoom):
-            raise RuntimeError("cannot render empty map, add lines / markers / polygons first")
+        if (
+            not self.lines
+            and not self.markers
+            and not self.polygons
+            and not (center and zoom)
+        ):
+            raise RuntimeError(
+                "cannot render empty map, add lines / markers / polygons first"
+            )
 
         if zoom is None:
             self.zoom = self._calculate_zoom()
@@ -327,7 +345,9 @@ class StaticMap:
             extent = self.determine_extent(zoom=self.zoom)
 
             # calculate center point of map
-            lon_center, lat_center = (extent[0] + extent[2]) / 2, (extent[1] + extent[3]) / 2
+            lon_center, lat_center = (extent[0] + extent[2]) / 2, (
+                extent[1] + extent[3]
+            ) / 2
             self.x_center = _lon_to_x(lon_center, self.zoom)
             self.y_center = _lat_to_y(lat_center, self.zoom)
 
@@ -397,7 +417,9 @@ class StaticMap:
             if width > (self.width - self.padding[0] * 2):
                 continue
 
-            height = (_lat_to_y(extent[1], z) - _lat_to_y(extent[3], z)) * self.tile_size
+            height = (
+                _lat_to_y(extent[1], z) - _lat_to_y(extent[3], z)
+            ) * self.tile_size
             if height > (self.height - self.padding[1] * 2):
                 continue
 
@@ -462,7 +484,9 @@ class StaticMap:
 
             if nb_retry >= 3:
                 # maximum number of retries exceeded
-                raise RuntimeError("could not download {} tiles: {}".format(len(tiles), tiles))
+                raise RuntimeError(
+                    "could not download {} tiles: {}".format(len(tiles), tiles)
+                )
 
             failed_tiles = []
             futures = [
@@ -514,7 +538,9 @@ class StaticMap:
         # Pillow does not support anti aliasing for lines and circles
         # There is a trick to draw them on an image that is twice the size and resize it at the end before it gets merged with  the base layer
 
-        image_lines = Image.new("RGBA", (self.width * 2, self.height * 2), (255, 0, 0, 0))
+        image_lines = Image.new(
+            "RGBA", (self.width * 2, self.height * 2), (255, 0, 0, 0)
+        )
         draw = ImageDraw.Draw(image_lines)
 
         for polygon in self.polygons:
@@ -529,7 +555,9 @@ class StaticMap:
                 points = _simplify(points)
 
             if polygon.fill_color or polygon.outline_color:
-                draw.polygon(points, fill=polygon.fill_color, outline=polygon.outline_color)
+                draw.polygon(
+                    points, fill=polygon.fill_color, outline=polygon.outline_color
+                )
 
         for line in self.lines:
             points = [
@@ -590,7 +618,7 @@ class StaticMap:
 
     def _draw_labels_and_lines(self, draw):
         font_path = "Courier-New.ttf"  # Choose the font path on your system
-        font_size = 40  # Adjust the font size as needed
+        font_size = 25  # Adjust the font size as needed
         font = ImageFont.truetype(font_path, font_size)
         labels = []
         for circle in filter(lambda m: isinstance(m, CircleMarker), self.markers):
@@ -606,7 +634,7 @@ class StaticMap:
             j = 0
             for l2 in labels[i:]:
                 j += 1
-                #print(l1.text, l2.text, l1.corners(), l2.corners())
+                # print(l1.text, l2.text, l1.corners(), l2.corners())
                 if not (l1.equals(l2)) and l1.intersect(l2):
                     # print(
                     #     "%s intersects %s" % (l1.text, l2.text),
@@ -626,14 +654,16 @@ class StaticMap:
                         for l3 in labels:
                             if not (l2.equals(l3)) and l2.intersect(l3):
 
-
                                 found_spot = False
 
-
         for l in labels:
-            #draw.polygon(l.corners(), fill="#FFFFFF11", outline="#FFFFFF11")
+            # draw.polygon(l.corners(), fill="#FFFFFF11", outline="#FFFFFF11")
             if l.label_coordinates != l.point_coordinates:
-                draw.line([l.label_coordinates, tuple(l.point_coordinates)], fill="black", width=2)
+                draw.line(
+                    [l.label_coordinates, tuple(l.point_coordinates)],
+                    fill="black",
+                    width=2,
+                )
             draw.text(
                 (l.label_coordinates[0], l.label_coordinates[1]),
                 l.text,

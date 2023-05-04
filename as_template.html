@@ -43,7 +43,6 @@
             text-align: center;
         }
 
-
         .page-break {
             page-break-before: always;
         }
@@ -151,9 +150,9 @@
             </tr>
         </table>
     </div>
-    <!--<div id="map">
+    <div id="map">
         <img src="{{ image_path }}">
-    </div>-->
+    </div>
 </div>
 <div class="page-break"></div>
 <div id="page2">
@@ -464,7 +463,41 @@
         <img src="{{ image_path }}">
     </div>
 </div>
-<div id="page8" class="landscape" style="font-size:0.8em">
+<div id="page7" class="landscape">
+    <h4>OUTIL 4. RESSOURCES HUMAINES</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Formation Sanitaire</th>
+            <th>Diplôme</th>
+            <th>Grade</th>
+            <th>Age</th>
+            <th>Formation Vacc.</th>
+            <th>Nom</th>
+            <th>Téléphone</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        {% for fosa in data.fosas %}
+        {% for p in fosa.personnel.personnel_fosa %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{fosa.name}}</td>
+            <td>{{p.diplome}}</td>
+            <td>{{p.grade_personnel}}</td>
+            <td>{{p.age_personnel}}</td>
+            <td>{{p.formation_vaccination_pratique}}</td>
+            <td>{{p.nom_personnel}}</td>
+            <td>{{p.tel_personnel}}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="page8" class="landscape page-break" style="font-size:0.8em">
     <h4>OUTIL 5. CHAINE DU FROID</h4>
     <table>
         <thead>

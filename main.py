@@ -12,6 +12,7 @@ from jinja2 import Undefined, Template
 import random
 import hashlib
 from os.path import exists
+from pypdf import PdfWriter
 
 server = "https://iaso.bluesquare.org"
 forms_endpoint = server + "/api/forms/"
@@ -52,7 +53,7 @@ def get_headers():
 headers = get_headers()
 
 
-def access_and_cache(url, use_cache=True):
+def access_and_cache(url, use_cache=False):
     m = hashlib.sha256(url.encode("UTF-8")).hexdigest()
     path = "cache/%s" % m
 
@@ -77,11 +78,14 @@ def access_and_cache(url, use_cache=True):
 def get_as_info(as_id):
     # request AS data and the relevant submissions
     data = {}
-    data["as"] = access_and_cache("https://iaso.bluesquare.org/api/orgunits/%d/" % as_id)
+    data["as"] = access_and_cache(
+        "https://iaso.bluesquare.org/api/orgunits/%d/" % as_id
+    )
     reference_instance_id = data["as"]["reference_instance_id"]
 
     data["forms"] = access_and_cache(
-        "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false" % as_id
+        "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false"
+        % as_id
     )["instances"]
 
     # Handling fosas and their reference form
@@ -132,7 +136,7 @@ def get_as_info(as_id):
         l_dict = localite_dict.get(i.get("org_unit").get("id"), {})
         l_dict["microplan"] = file_content
 
-    #handling cold chain
+    # handling cold chain
     instances = access_and_cache(
         "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=740&limit=20&order=org_unit__name&page=1&showDeleted=false&orgUnitParentId=%s"
         % as_id
@@ -142,13 +146,29 @@ def get_as_info(as_id):
         l_dict = fosa_dict.get(i.get("org_unit").get("id"), {})
         l_dict["cold_chain"] = file_content
 
+    # handling personnel
+    instances = access_and_cache(
+        "https://iaso.bluesquare.org/api/instances/?orgUnitTypeId=207&form_ids=738&limit=20&order=org_unit__name&page=1&showDeleted=false&orgUnitParentId=%s"
+        % as_id
+    )["instances"]
+    for i in instances:
+        file_content = i.get("file_content")
+        l_dict = fosa_dict.get(i.get("org_unit").get("id"), {})
+        l_dict["personnel"] = file_content
+
     return data
 
 
 def create_map(data):
     as_id = data.get("as").get("id")
-    m = StaticMap(1850, 1200, padding_x=0, padding_y=0)
-    coordinates = data.get("as").get("geo_json").get("features")[0].get("geometry").get("coordinates")[0][0]
+    m = StaticMap(900, 600, padding_x=0, padding_y=0)
+    coordinates = (
+        data.get("as")
+        .get("geo_json")
+        .get("features")[0]
+        .get("geometry")
+        .get("coordinates")[0][0]
+    )
     polygon = Polygon(coordinates, "#0000FF22", "#0066CC", True)
     m.add_polygon(polygon)
 
@@ -158,7 +178,9 @@ def create_map(data):
         longitude = fosa.get("longitude")
 
         if latitude and longitude:
-            marker = CircleMarker((longitude, latitude), "#E53834", 12, name=fosa.get("name"))
+            marker = CircleMarker(
+                (longitude, latitude), "#E53834", 12, name=fosa.get("name")
+            )
             m.add_marker(marker)
 
     for localite in data.get("localites"):
@@ -166,7 +188,9 @@ def create_map(data):
         longitude = localite.get("longitude")
 
         if latitude and longitude:
-            marker = CircleMarker((longitude, latitude), "#00897B", 12, name=localite.get("name"))
+            marker = CircleMarker(
+                (longitude, latitude), "#00897B", 12, name=localite.get("name")
+            )
             m.add_marker(marker)
 
     image = m.render()
@@ -212,52 +236,70 @@ def write_html(data):
     return path
 
 
+def append_end(path, end_path):
+    merger = PdfWriter()
+
+    for pdf in [path, "end.pdf"]:
+        merger.append(pdf)
+
+    merger.write(end_path)
+    merger.close()
+    return path
+
+
+def process(as_id):
+    data = get_as_info(as_id)
+    print(as_id, data.get("as").get("name"))
+    create_map(data)
+    path = write_html(data)
+    pdf_path = "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
+    end_path = "generated/microplan-%s-%d.pdf" % (data.get("as").get("name"), as_id)
+    HTML(path).write_pdf(pdf_path)
+    append_end(pdf_path, end_path)
+    return end_path
+
+
 if __name__ == "__main__":
-    # as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
     from as_ids import as_ids
 
     random.shuffle(as_ids)
-    as_ids = [1053714]
-    #as_ids = [1056335, 1056978, 1049730, 1051335, 1050055, 1053714, 1053203]
-    #as_ids = [1056570,1055603,1054022,1052936,1055718,1053703,1057757,1054619,1057601,1057793,1123965,1052822,1056824,1053160,1052047]
+    as_ids = [1053708]
+
     for as_id in as_ids:
-        #try:
-            data = get_as_info(as_id)
-            print(as_id, data.get("as").get("name"))
-            #create_map(data)
-            if True:
-                path = write_html(data)
-                HTML(path).write_pdf("generated/%s-%d.pdf" % (data.get("as").get("name"), as_id))
-        #except:
-        #   print("failed for as nr: ", as_id)
+        # try:
+        process(as_id)
+    # except:
+    #   print("failed for as nr: ", as_id)
 
 from flask import Flask
 from flask import send_file
 from flask import request
+
 app = Flask(__name__)
+
 
 @app.route("/generate/<int:as_id>")
 def generate_microplan(as_id):
     as_id = int(as_id)
-    data = get_as_info(as_id)
-    create_map(data)
-    path = write_html(data)
-    file_name = "%s-%d.pdf" % (data.get("as").get("name"), as_id)
-    generated_path = "generated/%s" % file_name
-    HTML(path).write_pdf(generated_path)
-    return send_file(generated_path)
+    pdf = process(as_id)
+
+    return send_file(pdf)
+
 
 @app.route("/")
 def index():
     env = Environment(loader=FileSystemLoader("."), undefined=SilentUndefined)
     template = env.get_template("index.html")
-    html = template.render(
-    )
+    html = template.render()
     return html
 
-@app.route("/treesearch/") #proxying treesearch
+
+@app.route("/treesearch/")  # proxying treesearch
 def treesearch():
-    path = "https://iaso.bluesquare.org/api/orgunits/treesearch/?%s" % request.query_string.decode("utf-8")
+    path = (
+        "https://iaso.bluesquare.org/api/orgunits/treesearch/?%s"
+        % request.query_string.decode("utf-8")
+    )
 
     r = requests.get(
         path,
@@ -265,4 +307,3 @@ def treesearch():
     )
 
     return r.json()
-
