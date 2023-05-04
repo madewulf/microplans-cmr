@@ -11,6 +11,10 @@ from haversine import haversine
 from jinja2 import Undefined, Template
 import random
 import hashlib
+import openpyxl
+import shutil
+
+
 from os.path import exists
 from pypdf import PdfWriter
 
@@ -249,7 +253,7 @@ def append_end(path, end_path):
 
 def process(as_id):
     data = get_as_info(as_id)
-    print(as_id, data.get("as").get("name"))
+    #print(as_id, data.get("as").get("name"))
     create_map(data)
     path = write_html(data)
     pdf_path = "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
@@ -259,15 +263,95 @@ def process(as_id):
     return end_path
 
 
+def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, items):
+    worksheet = workbook.get_sheet_by_name(sheet_name)
+    i = 0
+    for fosa in items:
+        #print(fosa.get(form_name))
+        for key in columns:
+            cell = "%s%d" % (columns[key], start_line + i)
+            value = fosa.get(key, None)
+            if value is None:
+                value = fosa.get(form_name, {}).get(key, None)
+
+            #print(cell, key, value)
+            try: 
+                worksheet[cell] = value
+            except:
+                pass
+        i += 1
+
+
+def create_excel(as_id):
+    data = get_as_info(as_id)
+    create_map(data)
+    generated_path = "generated/excel/microplan-%s-%d.xlsx" % (
+        data.get("as").get("name"),
+        as_id,
+    )
+    workbook = openpyxl.load_workbook("Modele_microplan_AS.xlsx")
+    worksheet = workbook.get_sheet_by_name("0_Couverture")
+    image_path = "generated/images/%d.png" % as_id
+    if os.path.exists(image_path):
+        img = openpyxl.drawing.image.Image(image_path)
+        img.anchor = 'A31'
+        img.height = 600*1.7  # insert image height in pixels as float or int (e.g. 305.5)
+        img.width = 900*1.7
+        worksheet.add_image(img)
+
+    worksheet["E17"] = data.get("as").get("parent").get("parent").get("name")
+    worksheet["E18"] = data.get("as").get("parent").get("name")
+    worksheet["E19"] = data.get("as").get("name")
+    worksheet["E20"] = data.get("fosa_leader_instance").get("org_unit").get("name")
+    worksheet["E21"] = data.get("fosa_leader_instance").get("file_content").get("responsable_fosa")
+    worksheet["E22"] = data.get("fosa_leader_instance").get("file_content").get("tel_responsable_fosa")
+
+    count_fosa = len(data.get("fosas"))
+    worksheet["J24"] = count_fosa
+    count_localite = len(data.get("localites"))
+    worksheet["J26"] = count_localite
+
+    #FOSAS
+    columns = {
+        "name": "B",
+        "distance_fosa_ssd": "C",
+        "statut_fosa": "D",
+        "type_acces_ssd": "E",
+        "fosa_vaccine": "F",
+        "responsable_fosa": "G",
+        "tel_responsable_fosa": "H",
+        "id": "I"
+    }
+    fill_xls_with_form(
+        "1_Liste fosa", columns, 4, "donnees_fosa", workbook, data.get("fosas")
+    )
+
+    #LOCALITES
+    columns = {
+        "name": "B",
+        "localite_haute_tension": "F",
+        "raison_haute_attention": "G",
+        "population_denombre": "H",
+        "population_polio_0_59": "L",
+        "id": "R"
+    }
+    fill_xls_with_form(
+        "2a_Liste localites (toutes)", columns, 5, "microplan", workbook, data.get("localites")
+    )
+
+    workbook.save(generated_path)
+    return generated_path
+
 if __name__ == "__main__":
     from as_ids import as_ids
 
     random.shuffle(as_ids)
-    as_ids = [1053708]
+    as_ids = [1056142]
 
     for as_id in as_ids:
         # try:
-        process(as_id)
+        # process(as_id)
+        create_excel(as_id)
     # except:
     #   print("failed for as nr: ", as_id)
 
@@ -285,6 +369,13 @@ def generate_microplan(as_id):
 
     return send_file(pdf)
 
+
+@app.route("/generate_xls/<int:as_id>")
+def generate_microplan_excel(as_id):
+    as_id = int(as_id)
+    excel = create_excel(as_id)
+
+    return send_file(excel)
 
 @app.route("/")
 def index():

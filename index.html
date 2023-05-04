@@ -99,7 +99,7 @@
     });
     areaSelect.on('change', function () {
         link.html("")
-        link.append('<a href="/generate/' + this.value + '"> Télécharger Microplan PDF')
+        link.append('<a href="/generate/' + this.value + '"> Télécharger Microplan PDF</a> <br/><br/> ' + '<a href="/generate_xls/' + this.value + '"> Télécharger Microplan EXCEL</a> <br/> ')
         link.show()
     });
 </script>
