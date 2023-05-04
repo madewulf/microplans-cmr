@@ -198,10 +198,12 @@ def create_map(data):
                 (longitude, latitude), "#00897B", 12, name=localite.get("name")
             )
             m.add_marker(marker)
-
-    image = m.render()
-    image.save("generated/images/%d.png" % as_id)
-
+    try:
+        image = m.render()
+        image.save("generated/images/%d.png" % as_id)
+    except Exception as e: #it happens that there is nothing to draw and then it launches an exception
+        print("Exception while generating the map", e)
+        pass
 
 def write_html(data):
     area = data.get("as")
