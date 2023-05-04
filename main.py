@@ -166,16 +166,18 @@ def get_as_info(as_id):
 def create_map(data):
     as_id = data.get("as").get("id")
     m = StaticMap(900, 600, padding_x=0, padding_y=0)
-    coordinates = (
-        data.get("as")
-        .get("geo_json")
-        .get("features")[0]
-        .get("geometry")
-        .get("coordinates")[0][0]
-    )
-    polygon = Polygon(coordinates, "#0000FF22", "#0066CC", True)
-    m.add_polygon(polygon)
-
+    try:
+        coordinates = (
+            data.get("as")
+            .get("geo_json")
+            .get("features")[0]
+            .get("geometry")
+            .get("coordinates")[0][0]
+        )
+        polygon = Polygon(coordinates, "#0000FF22", "#0066CC", True)
+        m.add_polygon(polygon)
+    except:
+        pass
     for fosa in data.get("fosas"):
 
         latitude = fosa.get("latitude")
@@ -275,7 +277,13 @@ def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, ite
                 value = fosa.get(form_name, {}).get(key, None)
 
             #print(cell, key, value)
-            try: 
+            try:
+                try:
+                    #print(value, type(value))
+                    value = float(value)
+
+                except:
+                    pass
                 worksheet[cell] = value
             except:
                 pass
