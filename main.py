@@ -272,13 +272,14 @@ def process(as_id):
 def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, items):
     worksheet = workbook.get_sheet_by_name(sheet_name)
     i = 0
-    for fosa in items:
+    for item in items:
+
         # print(fosa.get(form_name))
         for key in columns:
             cell = "%s%d" % (columns[key], start_line + i)
-            value = fosa.get(key, None)
+            value = item.get(key, None)
             if value is None:
-                value = fosa.get(form_name, {}).get(key, None)
+                value = item.get(form_name, {}).get(key, None)
 
             # print(cell, key, value)
             try:
@@ -503,6 +504,46 @@ def create_excel(as_id):
         "file_content",
         workbook,
         obc_form,
+    )
+
+    columns = {
+        "type_organisation": "A",
+        "siege": "B",
+        "responsible": "C",
+        "telephone": "D"
+    }
+
+    obc_form = [f for f in data.get("forms") if f.get("form_name") =="MICROPLAN - OBC"]
+
+    fill_xls_with_form(
+        "4_Acteurs communication",
+        columns,
+        4,
+        "file_content",
+        workbook,
+        obc_form,
+    )
+
+    columns = {
+        "fosa_name": "A",
+        "diplome": "B",
+        "grade_personnel": "C",
+        "age_personnel": "D",
+        "formation_vaccination_pratique": "E",
+        "nom_personnel": "F",
+        "responsable_fosa": "G",
+        "tel_personnel": "H"
+    }
+
+    personnels = []
+    for fosa in data.get("fosas"):
+
+        for personnel in fosa.get("personnel", {}).get("personnel_fosa", {}):
+            personnel["fosa_name"] = fosa.get("name")
+            personnels.append(personnel)
+
+    fill_xls_with_form(
+        "6. Ressources humaines", columns, 4, "personnel_fosa", workbook, personnels
     )
 
     workbook.save(generated_path)
