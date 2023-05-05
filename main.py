@@ -316,13 +316,14 @@ def create_excel(as_id):
     worksheet["E17"] = data.get("as").get("parent").get("parent").get("name")
     worksheet["E18"] = data.get("as").get("parent").get("name")
     worksheet["E19"] = data.get("as").get("name")
-    worksheet["E20"] = data.get("fosa_leader_instance").get("org_unit").get("name")
-    worksheet["E21"] = (
-        data.get("fosa_leader_instance").get("file_content").get("responsable_fosa")
-    )
-    worksheet["E22"] = (
-        data.get("fosa_leader_instance").get("file_content").get("tel_responsable_fosa")
-    )
+    if data.get("fosa_leader_instance", {}):
+        worksheet["E20"] = data.get("fosa_leader_instance", {}).get("org_unit",{} ).get("name", "")
+        worksheet["E21"] = (
+            data.get("fosa_leader_instance", {}).get("file_content", {}).get("responsable_fosa", "")
+        )
+        worksheet["E22"] = (
+            data.get("fosa_leader_instance", {}).get("file_content", {}).get("tel_responsable_fosa", {})
+        )
 
     count_fosa = len(data.get("fosas"))
     worksheet["J24"] = count_fosa
