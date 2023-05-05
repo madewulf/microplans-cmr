@@ -114,7 +114,8 @@ def get_as_info(as_id):
         f_dict[
             "donnees_fosa"
         ] = file_content  # adding the content of the form as a field in the dictionary representing the FOSA, so that I can use that later in templates
-        if file_content.get("leader"):
+
+        if file_content.get("leader") == "1":
             fosa_leader_instance = i
 
     data["fosa_leader_instance"] = fosa_leader_instance
