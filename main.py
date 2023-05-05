@@ -335,12 +335,13 @@ def create_excel(as_id):
     columns = {
         "name": "B",
         "distance_fosa_ssd": "C",
-        "statut_fosa": "D",
-        "type_acces_ssd": "E",
-        "fosa_vaccine": "F",
-        "responsable_fosa": "G",
-        "tel_responsable_fosa": "H",
-        "id": "I",
+        "distance_fosa_pilote": "D",
+        "statut_fosa": "E",
+        "type_acces_ssd": "F",
+        "fosa_vaccine": "G",
+        "responsable_fosa": "H",
+        "tel_responsable_fosa": "I",
+        "id": "J",
     }
     fill_xls_with_form(
         "1_Liste fosa", columns, 4, "donnees_fosa", workbook, data.get("fosas")

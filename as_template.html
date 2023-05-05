@@ -162,7 +162,8 @@
         <tr>
             <th>N°</th>
             <th>FORMATION SANITAIRE</th>
-            <th>Distance par rapport à ka FOSA leader</th>
+            <th>Distance par rapport au District</th>
+            <th>Distance par rapport à la FOSA leader</th>
             <th>Catégorie</th>
             <th>Type</th>
             <th>Offre les services de vaccination (Oui/Non)</th>
@@ -176,6 +177,7 @@
             <td>{{loop.index}}</td>
             <td>{{fosa.name}}</td>
             <td>{{fosa.donnees_fosa.distance_fosa_ssd}}</td>
+            <td>{{fosa.donnees_fosa.distance_fosa_pilote}}</td>
             <td>{{fosa.donnees_fosa.type_acces_ssd}}</td>
             <td>{{fosa.donnees_fosa.statut_fosa}}</td>
             <td>{{fosa.donnees_fosa.fosa_vaccine}}</td>
