@@ -487,6 +487,24 @@ def create_excel(as_id):
         data.get("localites"),
     )
 
+    columns = {
+        "type_organisation": "A",
+        "siege": "B",
+        "responsible": "C",
+        "telephone": "D"
+    }
+
+    obc_form = [f for f in data.get("forms") if f.get("form_name") =="MICROPLAN - OBC"]
+
+    fill_xls_with_form(
+        "4_Acteurs communication",
+        columns,
+        4,
+        "file_content",
+        workbook,
+        obc_form,
+    )
+
     workbook.save(generated_path)
     return generated_path
 
