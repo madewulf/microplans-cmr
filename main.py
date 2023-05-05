@@ -201,9 +201,10 @@ def create_map(data):
     try:
         image = m.render()
         image.save("generated/images/%d.png" % as_id)
-    except Exception as e: #it happens that there is nothing to draw and then it launches an exception
+    except Exception as e:  # it happens that there is nothing to draw and then it launches an exception
         print("Exception while generating the map", e)
         pass
+
 
 def write_html(data):
     area = data.get("as")
@@ -257,7 +258,7 @@ def append_end(path, end_path):
 
 def process(as_id):
     data = get_as_info(as_id)
-    #print(as_id, data.get("as").get("name"))
+    # print(as_id, data.get("as").get("name"))
     create_map(data)
     path = write_html(data)
     pdf_path = "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
@@ -271,17 +272,17 @@ def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, ite
     worksheet = workbook.get_sheet_by_name(sheet_name)
     i = 0
     for fosa in items:
-        #print(fosa.get(form_name))
+        # print(fosa.get(form_name))
         for key in columns:
             cell = "%s%d" % (columns[key], start_line + i)
             value = fosa.get(key, None)
             if value is None:
                 value = fosa.get(form_name, {}).get(key, None)
 
-            #print(cell, key, value)
+            # print(cell, key, value)
             try:
                 try:
-                    #print(value, type(value))
+                    # print(value, type(value))
                     value = float(value)
 
                 except:
@@ -295,6 +296,7 @@ def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, ite
 def create_excel(as_id):
     data = get_as_info(as_id)
     create_map(data)
+    print(data.get("as").get("name"))
     generated_path = "generated/excel/microplan-%s-%d.xlsx" % (
         data.get("as").get("name"),
         as_id,
@@ -304,24 +306,30 @@ def create_excel(as_id):
     image_path = "generated/images/%d.png" % as_id
     if os.path.exists(image_path):
         img = openpyxl.drawing.image.Image(image_path)
-        img.anchor = 'A31'
-        img.height = 600*1.7  # insert image height in pixels as float or int (e.g. 305.5)
-        img.width = 900*1.7
+        img.anchor = "A31"
+        img.height = (
+            600 * 1.7
+        )  # insert image height in pixels as float or int (e.g. 305.5)
+        img.width = 900 * 1.7
         worksheet.add_image(img)
 
     worksheet["E17"] = data.get("as").get("parent").get("parent").get("name")
     worksheet["E18"] = data.get("as").get("parent").get("name")
     worksheet["E19"] = data.get("as").get("name")
     worksheet["E20"] = data.get("fosa_leader_instance").get("org_unit").get("name")
-    worksheet["E21"] = data.get("fosa_leader_instance").get("file_content").get("responsable_fosa")
-    worksheet["E22"] = data.get("fosa_leader_instance").get("file_content").get("tel_responsable_fosa")
+    worksheet["E21"] = (
+        data.get("fosa_leader_instance").get("file_content").get("responsable_fosa")
+    )
+    worksheet["E22"] = (
+        data.get("fosa_leader_instance").get("file_content").get("tel_responsable_fosa")
+    )
 
     count_fosa = len(data.get("fosas"))
     worksheet["J24"] = count_fosa
     count_localite = len(data.get("localites"))
     worksheet["J26"] = count_localite
 
-    #FOSAS
+    # FOSAS
     columns = {
         "name": "B",
         "distance_fosa_ssd": "C",
@@ -330,33 +338,161 @@ def create_excel(as_id):
         "fosa_vaccine": "F",
         "responsable_fosa": "G",
         "tel_responsable_fosa": "H",
-        "id": "I"
+        "id": "I",
     }
     fill_xls_with_form(
         "1_Liste fosa", columns, 4, "donnees_fosa", workbook, data.get("fosas")
     )
 
-    #LOCALITES
+    # LOCALITES
+    for localite in data.get("localites"):
+
+        marches = ""
+
+        for marche in localite.get("microplan", {}).get("marche_localite", ""):
+            marches = marches + " " + marche.get("nom_marche", "") + "\n"
+        localite["marches"] = marches
+
+        ecoles = ""
+
+        for ecole in localite.get("microplan", {}).get("ecole_primaire_publique", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_ecole_primaire_publique", "")
+                + " - "
+                + ecole.get("contact_ecole_primaire_publique", "")
+                + " - "
+                + ecole.get("responsible_ecole_primaire_publique", "")
+                + "\n"
+            )
+        for ecole in localite.get("microplan", {}).get("ecole_maternel_publique", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_ecole_maternel_publique", "")
+                + " - "
+                + ecole.get("contact_ecole_maternel_publique", "")
+                + " - "
+                + ecole.get("responsible_ecole_maternel_publique", "")
+                + "\n"
+            )
+        for ecole in localite.get("microplan", {}).get("ecole_primaire_privee", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_ecole_primaire_privee", "")
+                + " - "
+                + ecole.get("contact_ecole_primaire_privee", "")
+                + " - "
+                + ecole.get("responsible_ecole_primaire_privee", "")
+                + "\n"
+            )
+        for ecole in localite.get("microplan", {}).get("ecole_maternel_privee", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_ecole_maternel_privee", "")
+                + " - "
+                + ecole.get("contact_ecole_maternel_privee", "")
+                + " - "
+                + ecole.get("responsible_ecole_maternel_privee", "")
+                + "\n"
+            )
+        for ecole in localite.get("microplan", {}).get("ecole_primaire_cor", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_ecole_primaire_cor", "")
+                + " - "
+                + ecole.get("contact_ecole_primaire_cor", "")
+                + " - "
+                + ecole.get("responsible_ecole_primaire_cor", "")
+                + "\n"
+            )
+
+        for ecole in localite.get("microplan", {}).get("creche_liste", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_creche", "")
+                + " - "
+                + ecole.get("contact_creche", "")
+                + " - "
+                + ecole.get("responsible_creche", "")
+                + "\n"
+            )
+        for ecole in localite.get("microplan", {}).get("orphelinat_liste", ""):
+            ecoles = (
+                ecoles
+                + " "
+                + ecole.get("nom_orphelinat", "")
+                + " - "
+                + ecole.get("contact_orphelinat", "")
+                + " - "
+                + ecole.get("responsible_orphelinat", "")
+                + "\n"
+            )
+
+        localite["ecoles"] = ecoles
+
+        eglises = ""
+        for eglise in localite.get("microplan", {}).get("liste_privee", ""):
+            eglises = (
+                eglises
+                + " "
+                + eglise.get("nom_eglise", "")
+                + " - "
+                + eglise.get("telephone_eglise", "")
+                + "\n"
+            )
+        for mosquee in localite.get("microplan", {}).get("liste_mosquee", ""):
+            eglises = (
+                eglises
+                + " "
+                + mosquee.get("nom_mosquee", "")
+                + " - "
+                + mosquee.get("telephone_mosquee", "")
+                + "\n"
+            )
+        localite["eglises"] = eglises
+
+        passages = ""
+        for passage in localite.get("microplan", {}).get("passage", ""):
+            passages = passages + " " + passage.get("point_passage", "") + "\n"
+
+        localite["passages"] = localite["eglises"] = eglises
+
     columns = {
         "name": "B",
         "localite_haute_tension": "F",
         "raison_haute_attention": "G",
         "population_denombre": "H",
-        "population_polio_0_59": "L",
-        "id": "R"
+        "population_polio_0_59": "N",
+        "marches": "O",
+        "ecoles": "P",
+        "eglises": "Q",
+        "passages": "R",
+        "id": "T",
     }
     fill_xls_with_form(
-        "2a_Liste localites (toutes)", columns, 5, "microplan", workbook, data.get("localites")
+        "2a_Liste localites (toutes)",
+        columns,
+        5,
+        "microplan",
+        workbook,
+        data.get("localites"),
     )
 
     workbook.save(generated_path)
     return generated_path
 
+
 if __name__ == "__main__":
     from as_ids import as_ids
 
     random.shuffle(as_ids)
-    as_ids = [1056142]
+    as_ids = [1057811]
 
     for as_id in as_ids:
         # try:
@@ -386,6 +522,7 @@ def generate_microplan_excel(as_id):
     excel = create_excel(as_id)
 
     return send_file(excel)
+
 
 @app.route("/")
 def index():
