@@ -1,0 +1,451 @@
+# English translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-05-08 08:20+0200\n"
+"PO-Revision-Date: 2023-05-08 08:21+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: as_template.html:103
+msgid ""
+"CAMPAGNE DE VACCINATION CONTRE LA\n"
+"        ROUGEOLE ET RUBEOLE MAI 2023"
+msgstr ""
+
+#: as_template.html:105
+msgid "MICROPLAN"
+msgstr ""
+
+#: as_template.html:110
+msgid "Date de mise à jour"
+msgstr ""
+
+#: as_template.html:114
+msgid "Région"
+msgstr ""
+
+#: as_template.html:118
+msgid "District"
+msgstr ""
+
+#: as_template.html:122
+msgid "Aire de santé"
+msgstr ""
+
+#: as_template.html:126
+msgid "FORMATION SANITAIRE LEADER"
+msgstr ""
+
+#: as_template.html:130
+msgid "NOM DU RESPONSABLE DE L'AIRE DE SANTE"
+msgstr ""
+
+#: as_template.html:134
+msgid "CONTACT DU RESPONSABLE DE L'AIRE"
+msgstr ""
+
+#: as_template.html:138
+msgid "NOMBRE DE FORMATION SANITAIRE"
+msgstr ""
+
+#: as_template.html:142
+msgid "NOMBRE DE LOCALITES DANS L'AIRE DE SANTE"
+msgstr ""
+
+#: as_template.html:146
+msgid "DISTANCE DE LA FORMATION SANITAIRE LEADER AU SERVICE SANTÉ DE DISTRICT"
+msgstr ""
+
+#: as_template.html:159
+msgid "Formations Sanitaires"
+msgstr ""
+
+#: as_template.html:164
+msgid "FORMATION SANITAIRE"
+msgstr ""
+
+#: as_template.html:165
+msgid "Distance par rapport au District"
+msgstr ""
+
+#: as_template.html:166
+msgid "Distance par rapport à la FOSA leader"
+msgstr ""
+
+#: as_template.html:167
+msgid "Catégorie"
+msgstr ""
+
+#: as_template.html:168
+msgid "Type"
+msgstr ""
+
+#: as_template.html:169
+msgid "Offre les services de vaccination (Oui/Non)"
+msgstr ""
+
+#: as_template.html:170
+msgid "Nom du Responsable"
+msgstr ""
+
+#: as_template.html:171
+msgid "Tel contact"
+msgstr ""
+
+#: as_template.html:193
+msgid "OUTIL 1b: LISTE DES LOCALITES"
+msgstr ""
+
+#: as_template.html:198
+msgid "Lieux regroupement"
+msgstr ""
+
+#: as_template.html:205 as_template.html:389 as_template.html:431
+msgid ""
+"Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, "
+"etc.)"
+msgstr ""
+
+#: as_template.html:206
+msgid "Distance à la FOSA qui vaccine la plus proche."
+msgstr ""
+
+#: as_template.html:207
+msgid "Localité de haute attention (oui/non)"
+msgstr ""
+
+#: as_template.html:208
+msgid "Raison de priorisation"
+msgstr ""
+
+#: as_template.html:209
+msgid "Population Totale"
+msgstr ""
+
+#: as_template.html:210
+msgid "Pop. Cible (9mois-59 mois)"
+msgstr ""
+
+#: as_template.html:211
+msgid "Marchés"
+msgstr ""
+
+#: as_template.html:212
+msgid "Ecoles primaires, maternelles et coraniques)"
+msgstr ""
+
+#: as_template.html:213
+msgid "Eglises /Mosquées"
+msgstr ""
+
+#: as_template.html:214
+msgid "Points de passage"
+msgstr ""
+
+#: as_template.html:268
+msgid "Raisons de priorisation:"
+msgstr ""
+
+#: as_template.html:270
+msgid " Nomades; Déplacés; Réfugiés"
+msgstr ""
+
+#: as_template.html:271
+msgid "Routine irregulier ou inexistant"
+msgstr ""
+
+#: as_template.html:272
+msgid "Couverture faible des AVS precedentes"
+msgstr ""
+
+#: as_template.html:273
+msgid "Episodes epidemiques (Polio, Rougeole, …)"
+msgstr ""
+
+#: as_template.html:274
+msgid "Groupes refractaires a la vaccination"
+msgstr ""
+
+#: as_template.html:275
+msgid "Enfants manques lors des AVS precedentes"
+msgstr ""
+
+#: as_template.html:276
+msgid "Zones / Villages / Quartiers avec insecurite"
+msgstr ""
+
+#: as_template.html:277
+msgid "Acces géographique très difficile"
+msgstr ""
+
+#: as_template.html:278
+msgid "Nouveaux hameaux / Quartiers"
+msgstr ""
+
+#: as_template.html:279
+msgid "Zone de transit normades, déplacés, réfugiés"
+msgstr ""
+
+#: as_template.html:280
+msgid "Autres"
+msgstr ""
+
+#: as_template.html:286
+msgid "OUTIL 2: ANALYSE DES PROBLEMES"
+msgstr ""
+
+#: as_template.html:287
+msgid ""
+"Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et"
+" Solutions Apportées"
+msgstr ""
+
+#: as_template.html:292
+msgid "Problemes Identifies"
+msgstr ""
+
+#: as_template.html:293
+msgid "Solutions avec Ressources Disponibles"
+msgstr ""
+
+#: as_template.html:294
+msgid "Solutions avec Ressources Additionelles"
+msgstr ""
+
+#: as_template.html:299
+msgid "Personnel"
+msgstr ""
+
+#: as_template.html:305
+msgid "Logistique"
+msgstr ""
+
+#: as_template.html:311
+msgid "Qualite services"
+msgstr ""
+
+#: as_template.html:317
+msgid "Gestion / Planification"
+msgstr ""
+
+#: as_template.html:323
+msgid "Supervision"
+msgstr ""
+
+#: as_template.html:329
+msgid "Donnees"
+msgstr ""
+
+#: as_template.html:335
+msgid "Mobilisation Sociale"
+msgstr ""
+
+#: as_template.html:347
+msgid "OUTIL 3: CARTOGRAPHIE DES PARTENAIRES ET ACTEURS DE COMMUNICATION"
+msgstr ""
+
+#: as_template.html:351
+msgid "Type d'organisation"
+msgstr ""
+
+#: as_template.html:352
+msgid "Adresse/Siège"
+msgstr ""
+
+#: as_template.html:353
+msgid "Contact"
+msgstr ""
+
+#: as_template.html:354 as_template.html:480
+msgid "Téléphone"
+msgstr ""
+
+#: as_template.html:355
+msgid "Type d’appui attendu"
+msgstr ""
+
+#: as_template.html:356
+msgid "Activités à mener pour solliciter ce support"
+msgstr ""
+
+#: as_template.html:376 as_template.html:418 as_template.html:463
+msgid ""
+"OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE "
+"VACCINATION"
+msgstr ""
+
+#: as_template.html:377
+msgid "3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE"
+msgstr ""
+
+#: as_template.html:382
+msgid "Jour de mobilisation"
+msgstr ""
+
+#: as_template.html:390
+msgid "Population totale"
+msgstr ""
+
+#: as_template.html:391
+msgid "Nombre de ménages à visiter"
+msgstr ""
+
+#: as_template.html:392
+msgid "Agent mobilisateur social responsable"
+msgstr ""
+
+#: as_template.html:393 as_template.html:435
+msgid "Nombre de jour requis"
+msgstr ""
+
+#: as_template.html:394 as_template.html:436
+msgid "J1"
+msgstr ""
+
+#: as_template.html:395 as_template.html:437
+msgid "J2"
+msgstr ""
+
+#: as_template.html:396 as_template.html:438
+msgid "J3"
+msgstr ""
+
+#: as_template.html:419
+msgid "3b: ITINERAIRE DES EQUIPES DE VACCINATION"
+msgstr ""
+
+#: as_template.html:424
+msgid "Jour de vaccination"
+msgstr ""
+
+#: as_template.html:430 as_template.html:473 as_template.html:513
+msgid "N°"
+msgstr ""
+
+#: as_template.html:432
+msgid "Population cible"
+msgstr ""
+
+#: as_template.html:433
+msgid "Stratégie de vaccination"
+msgstr ""
+
+#: as_template.html:434
+msgid "Equipe de vaccination responsable"
+msgstr ""
+
+#: as_template.html:439
+msgid "J4"
+msgstr ""
+
+#: as_template.html:440
+msgid "J5"
+msgstr ""
+
+#: as_template.html:469
+msgid "OUTIL 4. RESSOURCES HUMAINES"
+msgstr ""
+
+#: as_template.html:474 as_template.html:514
+msgid "Formation Sanitaire"
+msgstr ""
+
+#: as_template.html:475
+msgid "Diplôme"
+msgstr ""
+
+#: as_template.html:476
+msgid "Grade"
+msgstr ""
+
+#: as_template.html:477
+msgid "Age"
+msgstr ""
+
+#: as_template.html:478
+msgid "Formation Vacc."
+msgstr ""
+
+#: as_template.html:479
+msgid "Nom"
+msgstr ""
+
+#: as_template.html:503
+msgid "OUTIL 5. CHAINE DU FROID"
+msgstr ""
+
+#: as_template.html:508
+msgid "Requis"
+msgstr ""
+
+#: as_template.html:509
+msgid "Disponible"
+msgstr ""
+
+#: as_template.html:510
+msgid "BESOINS SUPPLEMENTAIRES"
+msgstr ""
+
+#: as_template.html:515 as_template.html:520 as_template.html:525
+msgid "Réfrigérateur"
+msgstr ""
+
+#: as_template.html:516
+msgid "Glacière"
+msgstr ""
+
+#: as_template.html:517 as_template.html:522 as_template.html:527
+msgid "Porte vaccin"
+msgstr ""
+
+#: as_template.html:518 as_template.html:523 as_template.html:528
+msgid "Accumulateurs pour glacière"
+msgstr ""
+
+#: as_template.html:519 as_template.html:524 as_template.html:529
+msgid "Accumulateurs pour porte vaccin"
+msgstr ""
+
+#: as_template.html:521 as_template.html:526
+msgid "Glaçière"
+msgstr ""
+
+#: index.html:4
+msgid "Microplans Cameroon"
+msgstr ""
+
+#: index.html:43
+msgid "Téléchargement de Microplans"
+msgstr ""
+
+#: index.html:54
+msgid ""
+"Les microplans générés ici sont créés en direct à partir des données "
+"présentes dans Iaso."
+msgstr ""
+
+#: index.html:55
+msgid ""
+"Si une information manque, uploadez la (en utilisant l'application mobile"
+" <a "
+"href=\"https://play.google.com/store/apps/details?id=com.bluesquarehub.iaso.camerooncollect\">Cameroon"
+" Collect</a> ou via <a href=\"https://iaso.bluesquare.org/\">Iaso</a>) et"
+" re-téléchargez le microplan."
+msgstr ""
+
+#: index.html:67
+msgid "Choisissez"
+msgstr ""
+

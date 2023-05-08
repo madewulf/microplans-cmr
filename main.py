@@ -13,7 +13,12 @@ import random
 import hashlib
 import openpyxl
 import shutil
+from jinja2 import Environment, FileSystemLoader
+from jinja2.ext import i18n
 
+from jinja2 import Environment, FileSystemLoader
+from jinja2.ext import i18n
+from babel.support import Translations
 
 from os.path import exists
 from pypdf import PdfWriter
@@ -207,11 +212,25 @@ def create_map(data):
         pass
 
 
+def get_translations(lang):
+    return Translations.load("translations", [lang])
+
+
 def write_html(data):
     area = data.get("as")
     as_id = area.get("id")
     # Load the Jinja2 template from a separate file
-    env = Environment(loader=FileSystemLoader("."), undefined=SilentUndefined)
+    env = Environment(
+        loader=FileSystemLoader("."), extensions=[i18n], undefined=SilentUndefined
+    )
+
+    # Example of rendering a template with French translations
+    lang = "en"
+    translations = get_translations(lang)
+    env.install_gettext_translations(translations)
+
+    # env.install_gettext_translations()
+
     template = env.get_template("as_template.html")
     # Define the path to the image file
     image_path = "images/%d.png" % as_id
@@ -319,12 +338,18 @@ def create_excel(as_id):
     worksheet["E18"] = data.get("as").get("parent").get("name")
     worksheet["E19"] = data.get("as").get("name")
     if data.get("fosa_leader_instance", {}):
-        worksheet["E20"] = data.get("fosa_leader_instance", {}).get("org_unit",{} ).get("name", "")
+        worksheet["E20"] = (
+            data.get("fosa_leader_instance", {}).get("org_unit", {}).get("name", "")
+        )
         worksheet["E21"] = (
-            data.get("fosa_leader_instance", {}).get("file_content", {}).get("responsable_fosa", "")
+            data.get("fosa_leader_instance", {})
+            .get("file_content", {})
+            .get("responsable_fosa", "")
         )
         worksheet["E22"] = (
-            data.get("fosa_leader_instance", {}).get("file_content", {}).get("tel_responsable_fosa", {})
+            data.get("fosa_leader_instance", {})
+            .get("file_content", {})
+            .get("tel_responsable_fosa", {})
         )
 
     count_fosa = len(data.get("fosas"))
@@ -492,10 +517,10 @@ def create_excel(as_id):
         "type_organisation": "A",
         "siege": "B",
         "responsible": "C",
-        "telephone": "D"
+        "telephone": "D",
     }
 
-    obc_form = [f for f in data.get("forms") if f.get("form_name") =="MICROPLAN - OBC"]
+    obc_form = [f for f in data.get("forms") if f.get("form_name") == "MICROPLAN - OBC"]
 
     fill_xls_with_form(
         "4_Acteurs communication",
@@ -510,10 +535,10 @@ def create_excel(as_id):
         "type_organisation": "A",
         "siege": "B",
         "responsible": "C",
-        "telephone": "D"
+        "telephone": "D",
     }
 
-    obc_form = [f for f in data.get("forms") if f.get("form_name") =="MICROPLAN - OBC"]
+    obc_form = [f for f in data.get("forms") if f.get("form_name") == "MICROPLAN - OBC"]
 
     fill_xls_with_form(
         "4_Acteurs communication",
@@ -532,7 +557,7 @@ def create_excel(as_id):
         "formation_vaccination_pratique": "E",
         "nom_personnel": "F",
         "responsable_fosa": "G",
-        "tel_personnel": "H"
+        "tel_personnel": "H",
     }
 
     personnels = []
@@ -588,7 +613,12 @@ def generate_microplan_excel(as_id):
 
 @app.route("/")
 def index():
-    env = Environment(loader=FileSystemLoader("."), undefined=SilentUndefined)
+    env = Environment(
+        loader=FileSystemLoader("."), extensions=[i18n], undefined=SilentUndefined
+    )
+    lang = "en"
+    translations = get_translations(lang)
+    env.install_gettext_translations(translations)
     template = env.get_template("index.html")
     html = template.render()
     return html

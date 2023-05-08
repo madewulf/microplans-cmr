@@ -1,5 +1,7 @@
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>{% trans %}Microplans Cameroon{% endtrans %}</title>
     <script
             src="https://code.jquery.com/jquery-3.6.4.min.js"
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
@@ -38,7 +40,7 @@
 </head>
 <body>
 <div id="container">
-    <h1>Téléchargement de Microplans</h1>
+    <h1>{% trans %}Téléchargement de Microplans{% endtrans %}</h1>
     <div>
         <select id="regionSelect"></select>
         <br><br>
@@ -49,8 +51,8 @@
         <span id="link"></span>
     </div>
     <div>
-        <p>Les microplans générés ici sont créés en direct à partir des données présentes dans Iaso.</p>
-        <p>Si une information manque, uploadez la (en utilisant l'application mobile <a href="https://play.google.com/store/apps/details?id=com.bluesquarehub.iaso.camerooncollect">Cameroon Collect</a> ou via <a href="https://iaso.bluesquare.org/">Iaso</a>) et re-téléchargez le microplan.</p>
+        <p>{% trans %}Les microplans générés ici sont créés en direct à partir des données présentes dans Iaso.{% endtrans %}</p>
+        <p>{% trans %}Si une information manque, uploadez la (en utilisant l'application mobile <a href="https://play.google.com/store/apps/details?id=com.bluesquarehub.iaso.camerooncollect">Cameroon Collect</a> ou via <a href="https://iaso.bluesquare.org/">Iaso</a>) et re-téléchargez le microplan.{% endtrans %}</p>
     </div>
 </div>
 </body>
@@ -62,7 +64,7 @@
 
     function fillSelect(select, data) {
         $(select).empty();
-        $(select).append("<option disabled selected value> -- Choisissez -- </option>")
+        $(select).append("<option disabled selected value> -- {% trans %}Choisissez{% endtrans %} -- </option>")
         $(data.orgunits).each(function () {
             $(select).append($("<option>").attr('value', this.id).text(this.name));
         });

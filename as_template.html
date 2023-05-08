@@ -100,50 +100,50 @@
         </div>
 
     </div>
-    <div style="background-color: darkred; color:white;" class="mainTitle"><h4>CAMPAGNE DE VACCINATION CONTRE LA
-        ROUGEOLE ET RUBEOLE MAI 2023</h4></div>
-    <div class="mainTitle"><h4>MICROPLAN</h4></div>
+    <div style="background-color: darkred; color:white;" class="mainTitle"><h4>{% trans %}CAMPAGNE DE VACCINATION CONTRE LA
+        ROUGEOLE ET RUBEOLE MAI 2023{% endtrans %}</h4></div>
+    <div class="mainTitle"><h4>{% trans %}MICROPLAN{%endtrans%}</h4></div>
     <div>
 
         <table>
             <tr>
-                <td style="text-align: right;">Date de mise à jour</td>
+                <td style="text-align: right;">{% trans %}Date de mise à jour{% endtrans %}</td>
                 <td><strong>{{ date_str }}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">Région</td>
+                <td style="text-align: right;">{% trans %}Région{% endtrans %}</td>
                 <td><strong>{{data.as.parent.parent.name}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">District</td>
+                <td style="text-align: right;">{% trans %}District{% endtrans %}</td>
                 <td><strong>{{data.as.parent.name}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">Aire de santé</td>
+                <td style="text-align: right;">{% trans %}Aire de santé{% endtrans %}</td>
                 <td><strong>{{data.as.name}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">FORMATION SANITAIRE LEADER</td>
+                <td style="text-align: right;">{% trans %}FORMATION SANITAIRE LEADER{% endtrans %}</td>
                 <td><strong>{{data.fosa_leader_instance.org_unit.name}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">NOM DU RESPONSABLE DE L'AIRE DE SANTE</td>
+                <td style="text-align: right;">{% trans %}NOM DU RESPONSABLE DE L'AIRE DE SANTE{% endtrans %}</td>
                 <td><strong>{{data.fosa_leader_instance.file_content.responsable_fosa}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">CONTACT DU RESPONSABLE DE L'AIRE</td>
+                <td style="text-align: right;">{% trans %}CONTACT DU RESPONSABLE DE L'AIRE{% endtrans %}</td>
                 <td><strong>{{data.fosa_leader_instance.file_content.tel_responsable_fosa}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">NOMBRE DE FORMATION SANITAIRE</td>
+                <td style="text-align: right;">{% trans %}NOMBRE DE FORMATION SANITAIRE{% endtrans %}</td>
                 <td><strong>{{count_fosa}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">NOMBRE DE LOCALITES DANS L'AIRE DE SANTE</td>
+                <td style="text-align: right;">{% trans %}NOMBRE DE LOCALITES DANS L'AIRE DE SANTE{% endtrans %}</td>
                 <td><strong>{{count_localite}}</strong></td>
             </tr>
             <tr>
-                <td style="text-align: right;">DISTANCE DE LA FORMATION SANITAIRE LEADER AU SERVICE SANTÉ DE DISTRICT
+                <td style="text-align: right;">{% trans %}DISTANCE DE LA FORMATION SANITAIRE LEADER AU SERVICE SANTÉ DE DISTRICT{% endtrans %}
                     (km)
                 </td>
                 <td><strong></strong></td>
@@ -156,19 +156,19 @@
 </div>
 <div class="page-break"></div>
 <div id="page2">
-    <h4>Formations Sanitaires</h4>
+    <h4>{% trans %}Formations Sanitaires{% endtrans %}</h4>
     <table>
         <thead>
         <tr>
             <th>N°</th>
-            <th>FORMATION SANITAIRE</th>
-            <th>Distance par rapport au District</th>
-            <th>Distance par rapport à la FOSA leader</th>
-            <th>Catégorie</th>
-            <th>Type</th>
-            <th>Offre les services de vaccination (Oui/Non)</th>
-            <th>Nom du Responsable</th>
-            <th>Tel contact</th>
+            <th>{% trans %}FORMATION SANITAIRE{% endtrans %}</th>
+            <th>{% trans %}Distance par rapport au District{% endtrans %}</th>
+            <th>{% trans %}Distance par rapport à la FOSA leader{% endtrans %}</th>
+            <th>{% trans %}Catégorie{% endtrans %}</th>
+            <th>{% trans %}Type{% endtrans %}</th>
+            <th>{% trans %}Offre les services de vaccination (Oui/Non){% endtrans %}</th>
+            <th>{% trans %}Nom du Responsable{% endtrans %}</th>
+            <th>{% trans %}Tel contact{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -190,28 +190,28 @@
 </div>
 
 <div id="page3" class="landscape">
-    <h4>OUTIL 1b: LISTE DES LOCALITES</h4>
+    <h4>{% trans %}OUTIL 1b: LISTE DES LOCALITES{% endtrans %}</h4>
     <table>
         <thead>
         <tr>
             <th colspan="8"></th>
-            <th colspan="5">Lieux regroupement</th>
+            <th colspan="5">{% trans %}Lieux regroupement{% endtrans %}</th>
         </tr>
         </thead>
         <thead>
 
         <tr>
             <th>N°</th>
-            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
-            <th>Distance à la FOSA qui vaccine la plus proche.</th>
-            <th>Localité de haute attention (oui/non)</th>
-            <th>Raison de priorisation</th>
-            <th>Population Totale</th>
-            <th>Pop. Cible (9mois-59 mois)</th>
-            <th>Marchés</th>
-            <th>Ecoles primaires, maternelles et coraniques)</th>
-            <th>Eglises /Mosquées</th>
-            <th>Points de passage</th>
+            <th>{% trans %}Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.){% endtrans %}</th>
+            <th>{% trans %}Distance à la FOSA qui vaccine la plus proche.{% endtrans %}</th>
+            <th>{% trans %}Localité de haute attention (oui/non){% endtrans %}</th>
+            <th>{% trans %}Raison de priorisation{% endtrans %}</th>
+            <th>{% trans %}Population Totale{% endtrans %}</th>
+            <th>{% trans %}Pop. Cible (9mois-59 mois){% endtrans %}</th>
+            <th>{% trans %}Marchés{% endtrans %}</th>
+            <th>{% trans %}Ecoles primaires, maternelles et coraniques){% endtrans %}</th>
+            <th>{% trans %}Eglises /Mosquées{% endtrans %}</th>
+            <th>{% trans %}Points de passage{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -265,74 +265,74 @@
         {% endfor %}
         </tbody>
     </table>
-    <div>Raisons de priorisation:
+    <div>{% trans %}Raisons de priorisation:{% endtrans %}
         <ul>
-            <li>1. Nomades; Déplacés; Réfugiés</li>
-            <li>2. Routine irregulier ou inexistant</li>
-            <li>3. Couverture faible des AVS precedentes</li>
-            <li>4. Episodes epidemiques (Polio, Rougeole, …)</li>
-            <li>5. Groupes refractaires a la vaccination</li>
-            <li>6. Enfants manques lors des AVS precedentes</li>
-            <li>7. Zones / Villages / Quartiers avec insecurite</li>
-            <li>8. Acces géographique très difficile</li>
-            <li>9. Nouveaux hameaux / Quartiers</li>
-            <li>10. Zone de transit normades, déplacés, réfugiés</li>
-            <li>11. Autres</li>
+            <li>1.{% trans %} Nomades; Déplacés; Réfugiés{% endtrans %}</li>
+            <li>2. {% trans %}Routine irregulier ou inexistant{% endtrans %}</li>
+            <li>3. {% trans %}Couverture faible des AVS precedentes{% endtrans %}</li>
+            <li>4. {% trans %}Episodes epidemiques (Polio, Rougeole, …){% endtrans %}</li>
+            <li>5. {% trans %}Groupes refractaires a la vaccination{% endtrans %}</li>
+            <li>6. {% trans %}Enfants manques lors des AVS precedentes{% endtrans %}</li>
+            <li>7. {% trans %}Zones / Villages / Quartiers avec insecurite{% endtrans %}</li>
+            <li>8. {% trans %}Acces géographique très difficile{% endtrans %}</li>
+            <li>9. {% trans %}Nouveaux hameaux / Quartiers{% endtrans %}</li>
+            <li>10. {% trans %}Zone de transit normades, déplacés, réfugiés{% endtrans %}</li>
+            <li>11. {% trans %}Autres{% endtrans %}</li>
         </ul>
     </div>
 </div>
 <div class="page-break"></div>
 <div id="page4">
-    <h4>OUTIL 2: ANALYSE DES PROBLEMES</h4>
-    <h5>Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et Solutions Apportées</h5>
+    <h4>{% trans %}OUTIL 2: ANALYSE DES PROBLEMES{% endtrans %}</h4>
+    <h5>{% trans %}Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et Solutions Apportées{% endtrans %}</h5>
     <table>
         <thead>
         <tr>
             <th></th>
-            <th>Problemes Identifies</th>
-            <th>Solutions avec Ressources Disponibles</th>
-            <th>Solutions avec Ressources Additionelles</th>
+            <th>{% trans %}Problemes Identifies{% endtrans %}</th>
+            <th>{% trans %}Solutions avec Ressources Disponibles{% endtrans %}</th>
+            <th>{% trans %}Solutions avec Ressources Additionelles{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>Personnel<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Personnel{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Logistique<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Logistique{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Qualite services<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Qualite services{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Gestion / Planification<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Gestion / Planification{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Supervision<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Supervision{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Donnees<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Donnees{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
         </tr>
         <tr>
-            <td>Mobilisation Sociale<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
+            <td>{% trans %}Mobilisation Sociale{% endtrans %}<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></td>
             <td/>
             <td/>
             <td/>
@@ -344,16 +344,16 @@
 </div>
 
 <div id="page4bis">
-    <h4>OUTIL 3: CARTOGRAPHIE DES PARTENAIRES ET ACTEURS DE COMMUNICATION</h4>
+    <h4>{% trans %}OUTIL 3: CARTOGRAPHIE DES PARTENAIRES ET ACTEURS DE COMMUNICATION{% endtrans %}</h4>
     <table>
         <thead>
         <tr>
-            <th>Type d'organisation</th>
-            <th>Adresse/Siège</th>
-            <th>Contact</th>
-            <th>Téléphone</th>
-            <th>Type d’appui attendu</th>
-            <th>Activités à mener pour solliciter ce support</th>
+            <th>{% trans %}Type d'organisation{% endtrans %}</th>
+            <th>{% trans %}Adresse/Siège{% endtrans %}</th>
+            <th>{% trans %}Contact{% endtrans %}</th>
+            <th>{% trans %}Téléphone{% endtrans %}</th>
+            <th>{% trans %}Type d’appui attendu{% endtrans %}</th>
+            <th>{% trans %}Activités à mener pour solliciter ce support{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -373,27 +373,27 @@
     </table>
 </div>
 <div id="page5" class="landscape">
-    <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
-    <h5>3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE</h5>
+    <h4>{% trans %}OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION{% endtrans %}</h4>
+    <h5>{% trans %}3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE{% endtrans %}</h5>
     <table>
         <thead>
         <tr>
             <th colspan="6"></th>
-            <th colspan="3">Jour de mobilisation</th>
+            <th colspan="3">{% trans %}Jour de mobilisation{% endtrans %}</th>
         </tr>
         </thead>
         <thead>
 
         <tr>
             <th>N°</th>
-            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
-            <th>Population totale</th>
-            <th>Nombre de ménages à visiter</th>
-            <th>Agent mobilisateur social responsable</th>
-            <th>Nombre de jour requis</th>
-            <th>J1</th>
-            <th>J2</th>
-            <th>J3</th>
+            <th>{% trans %}Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.){% endtrans %}</th>
+            <th>{% trans %}Population totale{% endtrans %}</th>
+            <th>{% trans %}Nombre de ménages à visiter{% endtrans %}</th>
+            <th>{% trans %}Agent mobilisateur social responsable{% endtrans %}</th>
+            <th>{% trans %}Nombre de jour requis{% endtrans %}</th>
+            <th>{% trans %}J1{% endtrans %}</th>
+            <th>{% trans %}J2{% endtrans %}</th>
+            <th>{% trans %}J3{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -415,29 +415,29 @@
 </div>
 
 <div id="page5bis" class="landscape">
-    <h4>OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
-    <h5>3b: ITINERAIRE DES EQUIPES DE VACCINATION</h5>
+    <h4>{% trans %}OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION{% endtrans %}</h4>
+    <h5>{% trans %}3b: ITINERAIRE DES EQUIPES DE VACCINATION{% endtrans %}</h5>
     <table>
         <thead>
         <tr>
             <th colspan="6"></th>
-            <th colspan="5">Jour de vaccination</th>
+            <th colspan="5">{% trans %}Jour de vaccination{% endtrans %}</th>
         </tr>
         </thead>
         <thead>
 
         <tr>
-            <th>N°</th>
-            <th>Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.)</th>
-            <th>Population cible</th>
-            <th>Stratégie de vaccination</th>
-            <th>Equipe de vaccination responsable</th>
-            <th>Nombre de jour requis</th>
-            <th>J1</th>
-            <th>J2</th>
-            <th>J3</th>
-            <th>J4</th>
-            <th>J5</th>
+            <th>{% trans %}N°{% endtrans %}</th>
+            <th>{% trans %}Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, etc.){% endtrans %}</th>
+            <th>{% trans %}Population cible{% endtrans %}</th>
+            <th>{% trans %}Stratégie de vaccination{% endtrans %}</th>
+            <th>{% trans %}Equipe de vaccination responsable{% endtrans %}</th>
+            <th>{% trans %}Nombre de jour requis{% endtrans %}</th>
+            <th>{% trans %}J1{% endtrans %}</th>
+            <th>{% trans %}J2{% endtrans %}</th>
+            <th>{% trans %}J3{% endtrans %}</th>
+            <th>{% trans %}J4{% endtrans %}</th>
+            <th>{% trans %}J5{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -460,24 +460,24 @@
     </table>
 </div>
 <div id="page6" class="landscape">
-    <h4> OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION</h4>
+    <h4> {% trans %}OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE VACCINATION{% endtrans %}</h4>
     <div id="map2">
         <img src="{{ image_path }}">
     </div>
 </div>
 <div id="page7" class="landscape">
-    <h4>OUTIL 4. RESSOURCES HUMAINES</h4>
+    <h4>{% trans %}OUTIL 4. RESSOURCES HUMAINES{% endtrans %}</h4>
     <table>
         <thead>
         <tr>
-            <th>N°</th>
-            <th>Formation Sanitaire</th>
-            <th>Diplôme</th>
-            <th>Grade</th>
-            <th>Age</th>
-            <th>Formation Vacc.</th>
-            <th>Nom</th>
-            <th>Téléphone</th>
+            <th>{% trans %}N°{% endtrans %}</th>
+            <th>{% trans %}Formation Sanitaire{% endtrans %}</th>
+            <th>{% trans %}Diplôme{% endtrans %}</th>
+            <th>{% trans %}Grade{% endtrans %}</th>
+            <th>{% trans %}Age{% endtrans %}</th>
+            <th>{% trans %}Formation Vacc.{% endtrans %}</th>
+            <th>{% trans %}Nom{% endtrans %}</th>
+            <th>{% trans %}Téléphone{% endtrans %}</th>
         </tr>
 
         </thead>
@@ -500,33 +500,33 @@
     </table>
 </div>
 <div id="page8" class="landscape page-break" style="font-size:0.8em">
-    <h4>OUTIL 5. CHAINE DU FROID</h4>
+    <h4>{% trans %}OUTIL 5. CHAINE DU FROID{% endtrans %}</h4>
     <table>
         <thead>
         <tr>
             <th colspan="2"></th>
-            <th colspan="5">Requis</th>
-            <th colspan="5">Disponible</th>
-            <th colspan="5">BESOINS SUPPLEMENTAIRES</th>
+            <th colspan="5">{% trans %}Requis{% endtrans %}</th>
+            <th colspan="5">{% trans %}Disponible{% endtrans %}</th>
+            <th colspan="5">{% trans %}BESOINS SUPPLEMENTAIRES{% endtrans %}</th>
         </tr>
         <tr>
-            <th>N°</th>
-            <th>Formation Sanitaire</th>
-            <th>Réfrigérateur</th>
-            <th>Glacière</th>
-            <th>Porte vaccin</th>
-            <th>Accumulateurs pour glacière</th>
-            <th>Accumulateurs pour porte vaccin</th>
-            <th>Réfrigérateur</th>
-            <th>Glaçière</th>
-            <th>Porte vaccin</th>
-            <th>Accumulateurs pour glacière</th>
-            <th>Accumulateurs pour porte vaccin</th>
-            <th>Réfrigérateur</th>
-            <th>Glaçière</th>
-            <th>Porte vaccin</th>
-            <th>Accumulateurs pour glacière</th>
-            <th>Accumulateurs pour porte vaccin</th>
+            <th>{% trans %}N°{% endtrans %}</th>
+            <th>{% trans %}Formation Sanitaire{% endtrans %}</th>
+            <th>{% trans %}Réfrigérateur{% endtrans %}</th>
+            <th>{% trans %}Glacière{% endtrans %}</th>
+            <th>{% trans %}Porte vaccin{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour glacière{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour porte vaccin{% endtrans %}</th>
+            <th>{% trans %}Réfrigérateur{% endtrans %}</th>
+            <th>{% trans %}Glaçière{% endtrans %}</th>
+            <th>{% trans %}Porte vaccin{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour glacière{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour porte vaccin{% endtrans %}</th>
+            <th>{% trans %}Réfrigérateur{% endtrans %}</th>
+            <th>{% trans %}Glaçière{% endtrans %}</th>
+            <th>{% trans %}Porte vaccin{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour glacière{% endtrans %}</th>
+            <th>{% trans %}Accumulateurs pour porte vaccin{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
