@@ -264,10 +264,14 @@ def write_html(data, lang="fr"):
     return path
 
 
-def append_end(path, end_path):
+def append_end(path, end_path, lang="fr"):
     merger = PdfWriter()
 
-    for pdf in [path, "end.pdf"]:
+    if lang == "fr":
+        end = "end.pdf"
+    else:
+        end = "end_EN.pdf"
+    for pdf in [path, end]:
         merger.append(pdf)
 
     merger.write(end_path)
