@@ -630,6 +630,16 @@ def generate_microplan_excel(as_id):
     return send_file(excel)
 
 
+@app.route("/microplan_district")
+def microplan_district():
+    lang = request.args.get("lang", "fr")
+    if lang == "fr":
+        path = "Modele_Microplan_District_RR_2023.xlsx"
+    else:
+        path = "Modele_Microplan_District_RR_2023_EN.xlsx"
+    return send_file(path)
+
+
 @app.route("/")
 def index():
     lang = request.args.get("lang", "fr")
