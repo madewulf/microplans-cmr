@@ -321,7 +321,10 @@ def create_excel(as_id, lang):
         data.get("as").get("name"),
         as_id,
     )
-    workbook = openpyxl.load_workbook("Modele_microplan_AS.xlsx")
+    if lang == "fr":
+        workbook = openpyxl.load_workbook("Modele_microplan_AS.xlsx")
+    else:
+        workbook = openpyxl.load_workbook("Modele_microplan_AS_EN.xlsx")
     worksheet = workbook.get_sheet_by_name("0_Couverture")
     image_path = "generated/images/%d.png" % as_id
     if os.path.exists(image_path):
@@ -348,12 +351,12 @@ def create_excel(as_id, lang):
         worksheet["E22"] = (
             data.get("fosa_leader_instance", {})
             .get("file_content", {})
-            .get("tel_responsable_fosa", {})
+            .get("tel_responsable_fosa", "")
         )
         worksheet["J28"] = (
             data.get("fosa_leader_instance", {})
             .get("file_content", {})
-            .get("distance_fosa_ssd", {})
+            .get("distance_fosa_ssd", 0)
         )
     count_fosa = len(data.get("fosas"))
     worksheet["J24"] = count_fosa
