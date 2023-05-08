@@ -36,10 +36,14 @@
             text-align: center;
             height:100%;
         }
+        #lang_select {
+            float: right;
+        }
     </style>
 </head>
 <body>
 <div id="container">
+    <div id="lang_select"> <a href="/?lang=fr">Français</a> <a href="/?lang=en">English</a></div>
     <h1>{% trans %}Téléchargement de Microplans{% endtrans %}</h1>
     <div>
         <select id="regionSelect"></select>
@@ -101,7 +105,7 @@
     });
     areaSelect.on('change', function () {
         link.html("")
-        link.append('<a href="/generate/' + this.value + '"> Télécharger Microplan PDF</a> <br/><br/> ' + '<a href="/generate_xls/' + this.value + '"> Télécharger Microplan EXCEL</a> <br/> ')
+        link.append('<a href="/generate/' + this.value + '?lang={{lang}}">Download PDF</a> <br/><br/> ' + '<a href="/generate_xls/' + this.value + '?lang={{lang}}">Download EXCEL</a> <br/> ')
         link.show()
     });
 </script>

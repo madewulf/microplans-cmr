@@ -8,444 +8,451 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-05-08 08:20+0200\n"
-"PO-Revision-Date: 2023-05-08 08:21+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: en\n"
+"PO-Revision-Date: 2023-05-08 15:32+0100\n"
+"Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: as_template.html:103
 msgid ""
 "CAMPAGNE DE VACCINATION CONTRE LA\n"
 "        ROUGEOLE ET RUBEOLE MAI 2023"
 msgstr ""
+"VACCINATION CAMPAIGN AGAINST MEASLES AND RUBELLE\n"
+"JUNE -JULY 2023"
 
 #: as_template.html:105
 msgid "MICROPLAN"
-msgstr ""
+msgstr "MICROPLAN"
 
 #: as_template.html:110
 msgid "Date de mise à jour"
-msgstr ""
+msgstr "Date of update"
 
 #: as_template.html:114
 msgid "Région"
-msgstr ""
+msgstr "Region"
 
 #: as_template.html:118
 msgid "District"
-msgstr ""
+msgstr "District"
 
 #: as_template.html:122
 msgid "Aire de santé"
-msgstr ""
+msgstr "Health area"
 
 #: as_template.html:126
 msgid "FORMATION SANITAIRE LEADER"
-msgstr ""
+msgstr "LEAD HEALTH FACILITY"
 
 #: as_template.html:130
 msgid "NOM DU RESPONSABLE DE L'AIRE DE SANTE"
-msgstr ""
+msgstr "NAME OF THE CHIEF OF HEALTH AREA"
 
 #: as_template.html:134
 msgid "CONTACT DU RESPONSABLE DE L'AIRE"
-msgstr ""
+msgstr "CONTACT OF THE CHIEF OF HEALTH AREA"
 
 #: as_template.html:138
 msgid "NOMBRE DE FORMATION SANITAIRE"
-msgstr ""
+msgstr "NUMBER OF HEALTH FACILITIES"
 
 #: as_template.html:142
 msgid "NOMBRE DE LOCALITES DANS L'AIRE DE SANTE"
-msgstr ""
+msgstr "NUMBER OF LOCALITIES/COMMUNITIES IN THE HEALTH AREA"
 
 #: as_template.html:146
 msgid "DISTANCE DE LA FORMATION SANITAIRE LEADER AU SERVICE SANTÉ DE DISTRICT"
-msgstr ""
+msgstr "DISTANCE FROM THE LEAD HEALTH FACILITY TO THE DISTRICT"
 
 #: as_template.html:159
 msgid "Formations Sanitaires"
-msgstr ""
+msgstr "Health Facilities"
 
 #: as_template.html:164
 msgid "FORMATION SANITAIRE"
-msgstr ""
+msgstr "HEALTH FACILITY"
 
 #: as_template.html:165
 msgid "Distance par rapport au District"
-msgstr ""
+msgstr "Distance from the district"
 
 #: as_template.html:166
 msgid "Distance par rapport à la FOSA leader"
-msgstr ""
+msgstr "Distance from the lead health facility"
 
 #: as_template.html:167
 msgid "Catégorie"
-msgstr ""
+msgstr "Category"
 
 #: as_template.html:168
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: as_template.html:169
 msgid "Offre les services de vaccination (Oui/Non)"
-msgstr ""
+msgstr "Provides immunisation services"
 
 #: as_template.html:170
 msgid "Nom du Responsable"
-msgstr ""
+msgstr "Nome of the head"
 
 #: as_template.html:171
 msgid "Tel contact"
-msgstr ""
+msgstr "Phone contat"
 
 #: as_template.html:193
 msgid "OUTIL 1b: LISTE DES LOCALITES"
-msgstr ""
+msgstr "TOOL 1b: LIST OF LOCALITIES"
 
 #: as_template.html:198
 msgid "Lieux regroupement"
-msgstr ""
+msgstr "Gathering sites"
 
 #: as_template.html:205 as_template.html:389 as_template.html:431
 msgid ""
 "Localités (Village/Hameaux/Camps de réfugiés/Quartiers/Blocs/Campements, "
 "etc.)"
 msgstr ""
+"Localities (Village/Hamlets/Refugees camps/Neighbourhoods/Blocks/"
+"Settlements, etc.)"
 
 #: as_template.html:206
 msgid "Distance à la FOSA qui vaccine la plus proche."
-msgstr ""
+msgstr "Distance from nearby health facility."
 
 #: as_template.html:207
 msgid "Localité de haute attention (oui/non)"
-msgstr ""
+msgstr "High attention localities"
 
 #: as_template.html:208
 msgid "Raison de priorisation"
-msgstr ""
+msgstr "Reason for prioritisation"
 
 #: as_template.html:209
 msgid "Population Totale"
-msgstr ""
+msgstr "Total population"
 
 #: as_template.html:210
 msgid "Pop. Cible (9mois-59 mois)"
-msgstr ""
+msgstr "Target population (9-59 months)"
 
 #: as_template.html:211
 msgid "Marchés"
-msgstr ""
+msgstr "Market places"
 
 #: as_template.html:212
 msgid "Ecoles primaires, maternelles et coraniques)"
-msgstr ""
+msgstr "Primary, nursery and coranic schools"
 
 #: as_template.html:213
 msgid "Eglises /Mosquées"
-msgstr ""
+msgstr "Churches and Mosques"
 
 #: as_template.html:214
 msgid "Points de passage"
-msgstr ""
+msgstr "Transit points (check points, toll gates, etc.)"
 
 #: as_template.html:268
 msgid "Raisons de priorisation:"
-msgstr ""
+msgstr "Reasons for prioritisation:"
 
 #: as_template.html:270
 msgid " Nomades; Déplacés; Réfugiés"
-msgstr ""
+msgstr "Nomads; Displaced persons; Refugees"
 
 #: as_template.html:271
 msgid "Routine irregulier ou inexistant"
-msgstr ""
+msgstr "No or irregular routine activities"
 
 #: as_template.html:272
 msgid "Couverture faible des AVS precedentes"
-msgstr ""
+msgstr "Poor coverage during previous SIAs"
 
 #: as_template.html:273
 msgid "Episodes epidemiques (Polio, Rougeole, …)"
-msgstr ""
+msgstr "Outbreak (Polio, Measles, …)"
 
 #: as_template.html:274
 msgid "Groupes refractaires a la vaccination"
-msgstr ""
+msgstr "Vaccine-refractory groups"
 
 #: as_template.html:275
 msgid "Enfants manques lors des AVS precedentes"
-msgstr ""
+msgstr "Missed children during previous SIAs"
 
 #: as_template.html:276
 msgid "Zones / Villages / Quartiers avec insecurite"
-msgstr ""
+msgstr "Security comprised areas/villages/neighbourhoods"
 
 #: as_template.html:277
 msgid "Acces géographique très difficile"
-msgstr ""
+msgstr "Hard to reach area"
 
 #: as_template.html:278
 msgid "Nouveaux hameaux / Quartiers"
-msgstr ""
+msgstr "New hamlets/neighbourhood"
 
 #: as_template.html:279
 msgid "Zone de transit normades, déplacés, réfugiés"
-msgstr ""
+msgstr "Transit area for nomads, displaced persons and refugees"
 
 #: as_template.html:280
 msgid "Autres"
-msgstr ""
+msgstr "Others"
 
 #: as_template.html:286
 msgid "OUTIL 2: ANALYSE DES PROBLEMES"
-msgstr ""
+msgstr "TOOL 2: PROBLEM ANALYSIS"
 
 #: as_template.html:287
 msgid ""
-"Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et"
-" Solutions Apportées"
-msgstr ""
+"Différents Problèmes Identifiés lors des Précédentes AVS( RR, FJ, TNN) et "
+"Solutions Apportées"
+msgstr "Problems identified during the previous SIAs and applied solutions"
 
 #: as_template.html:292
 msgid "Problemes Identifies"
-msgstr ""
+msgstr "Problems identified"
 
 #: as_template.html:293
 msgid "Solutions avec Ressources Disponibles"
-msgstr ""
+msgstr "Solutions based on available resources"
 
 #: as_template.html:294
 msgid "Solutions avec Ressources Additionelles"
-msgstr ""
+msgstr "Solutions needing additional resources"
 
 #: as_template.html:299
 msgid "Personnel"
-msgstr ""
+msgstr "Personnel"
 
 #: as_template.html:305
 msgid "Logistique"
-msgstr ""
+msgstr "Logistics"
 
 #: as_template.html:311
 msgid "Qualite services"
-msgstr ""
+msgstr "Quality of services"
 
 #: as_template.html:317
 msgid "Gestion / Planification"
-msgstr ""
+msgstr "Management/Planning"
 
 #: as_template.html:323
 msgid "Supervision"
-msgstr ""
+msgstr "Supervision"
 
 #: as_template.html:329
 msgid "Donnees"
-msgstr ""
+msgstr "Data"
 
 #: as_template.html:335
 msgid "Mobilisation Sociale"
-msgstr ""
+msgstr "Social mobilisation"
 
 #: as_template.html:347
 msgid "OUTIL 3: CARTOGRAPHIE DES PARTENAIRES ET ACTEURS DE COMMUNICATION"
-msgstr ""
+msgstr "TOOL 3: MAPPING OF PARTNERS AND COMMUNICATION ACTORS"
 
 #: as_template.html:351
 msgid "Type d'organisation"
-msgstr ""
+msgstr "Type of organisation"
 
 #: as_template.html:352
 msgid "Adresse/Siège"
-msgstr ""
+msgstr "Address/Head office"
 
 #: as_template.html:353
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: as_template.html:354 as_template.html:480
 msgid "Téléphone"
-msgstr ""
+msgstr "Phone"
 
 #: as_template.html:355
 msgid "Type d’appui attendu"
-msgstr ""
+msgstr "Expected support"
 
 #: as_template.html:356
 msgid "Activités à mener pour solliciter ce support"
-msgstr ""
+msgstr "Activities for seeking support"
 
 #: as_template.html:376 as_template.html:418 as_template.html:463
 msgid ""
 "OUTIL 3. CARTE ET ITINERAIRE DES MOBILISATEURS SOCIAUX ET EQUIPES DE "
 "VACCINATION"
-msgstr ""
+msgstr "TOOL 3: MAP AND ITINERARY OF SOCIAL MOBILISERS AND VACCINATION TEAMS"
 
 #: as_template.html:377
 msgid "3a: ITINERAIRE DES MOBILISATEURS SOCIAUX AVANT LA CAMPAGNE"
-msgstr ""
+msgstr "3a _: ITINERARY OF SOCIAL MOBILISERS AHEAD OF THE CAMPAIGN"
 
 #: as_template.html:382
 msgid "Jour de mobilisation"
-msgstr ""
+msgstr "Day of mobilisation"
 
 #: as_template.html:390
 msgid "Population totale"
-msgstr ""
+msgstr "Total population"
 
 #: as_template.html:391
 msgid "Nombre de ménages à visiter"
-msgstr ""
+msgstr "Number of households to be visited"
 
 #: as_template.html:392
 msgid "Agent mobilisateur social responsable"
-msgstr ""
+msgstr "Assigned social mobiliser"
 
 #: as_template.html:393 as_template.html:435
 msgid "Nombre de jour requis"
-msgstr ""
+msgstr "Required number of days"
 
 #: as_template.html:394 as_template.html:436
 msgid "J1"
-msgstr ""
+msgstr "D1"
 
 #: as_template.html:395 as_template.html:437
 msgid "J2"
-msgstr ""
+msgstr "D2"
 
 #: as_template.html:396 as_template.html:438
 msgid "J3"
-msgstr ""
+msgstr "D3"
 
 #: as_template.html:419
 msgid "3b: ITINERAIRE DES EQUIPES DE VACCINATION"
-msgstr ""
+msgstr "3b: ITINERARY OF VACCINATION TEAMS"
 
 #: as_template.html:424
 msgid "Jour de vaccination"
-msgstr ""
+msgstr "Day of vaccination"
 
 #: as_template.html:430 as_template.html:473 as_template.html:513
 msgid "N°"
-msgstr ""
+msgstr "N°"
 
 #: as_template.html:432
 msgid "Population cible"
-msgstr ""
+msgstr "Target population"
 
 #: as_template.html:433
 msgid "Stratégie de vaccination"
-msgstr ""
+msgstr "Vaccination strategy"
 
 #: as_template.html:434
 msgid "Equipe de vaccination responsable"
-msgstr ""
+msgstr "Assigned vaccination team"
 
 #: as_template.html:439
 msgid "J4"
-msgstr ""
+msgstr "D4"
 
 #: as_template.html:440
 msgid "J5"
-msgstr ""
+msgstr "D5"
 
 #: as_template.html:469
 msgid "OUTIL 4. RESSOURCES HUMAINES"
-msgstr ""
+msgstr "TOOL 4.  HUMAN RESOURCE"
 
 #: as_template.html:474 as_template.html:514
 msgid "Formation Sanitaire"
-msgstr ""
+msgstr "Health facility"
 
 #: as_template.html:475
 msgid "Diplôme"
-msgstr ""
+msgstr "Certificate"
 
 #: as_template.html:476
 msgid "Grade"
-msgstr ""
+msgstr "Grade"
 
 #: as_template.html:477
 msgid "Age"
-msgstr ""
+msgstr "Age"
 
 #: as_template.html:478
 msgid "Formation Vacc."
-msgstr ""
+msgstr "Training on vaccination."
 
 #: as_template.html:479
 msgid "Nom"
-msgstr ""
+msgstr "Name"
 
 #: as_template.html:503
 msgid "OUTIL 5. CHAINE DU FROID"
-msgstr ""
+msgstr "TOOL 5. COLD CHAIN"
 
 #: as_template.html:508
 msgid "Requis"
-msgstr ""
+msgstr "Required"
 
 #: as_template.html:509
 msgid "Disponible"
-msgstr ""
+msgstr "Available"
 
 #: as_template.html:510
 msgid "BESOINS SUPPLEMENTAIRES"
-msgstr ""
+msgstr "SUPPLEMENTARY NEEDS"
 
 #: as_template.html:515 as_template.html:520 as_template.html:525
 msgid "Réfrigérateur"
-msgstr ""
+msgstr "Fridges"
 
 #: as_template.html:516
 msgid "Glacière"
-msgstr ""
+msgstr "Coolbox"
 
 #: as_template.html:517 as_template.html:522 as_template.html:527
 msgid "Porte vaccin"
-msgstr ""
+msgstr "Vaccine carriers"
 
 #: as_template.html:518 as_template.html:523 as_template.html:528
 msgid "Accumulateurs pour glacière"
-msgstr ""
+msgstr "Cold water pack for coolbox"
 
 #: as_template.html:519 as_template.html:524 as_template.html:529
 msgid "Accumulateurs pour porte vaccin"
-msgstr ""
+msgstr "Cold water pack for vaccine carriers"
 
 #: as_template.html:521 as_template.html:526
 msgid "Glaçière"
-msgstr ""
+msgstr "Coolbox"
 
 #: index.html:4
 msgid "Microplans Cameroon"
-msgstr ""
+msgstr "Cameroon microplan"
 
 #: index.html:43
 msgid "Téléchargement de Microplans"
-msgstr ""
+msgstr "Download microplan"
 
 #: index.html:54
 msgid ""
 "Les microplans générés ici sont créés en direct à partir des données "
 "présentes dans Iaso."
-msgstr ""
+msgstr "The microplans generated here are created live from the data in Iaso."
 
 #: index.html:55
 msgid ""
-"Si une information manque, uploadez la (en utilisant l'application mobile"
-" <a "
-"href=\"https://play.google.com/store/apps/details?id=com.bluesquarehub.iaso.camerooncollect\">Cameroon"
-" Collect</a> ou via <a href=\"https://iaso.bluesquare.org/\">Iaso</a>) et"
-" re-téléchargez le microplan."
+"Si une information manque, uploadez la (en utilisant l'application mobile "
+"<a href=\"https://play.google.com/store/apps/details?id=com.bluesquarehub."
+"iaso.camerooncollect\">Cameroon Collect</a> ou via <a href=\"https://iaso."
+"bluesquare.org/\">Iaso</a>) et re-téléchargez le microplan."
 msgstr ""
+"If any information is missing, upload it (using <a href=\"https://play.google.com/"
+"store/apps/details?id=com.bluesquarehub.iaso.camerooncollect\">Cameroon "
+"Collect</a> or using <a href=\"https://iaso.bluesquare.org/\">Iaso</a>) and "
+"download the microplan again."
 
 #: index.html:67
 msgid "Choisissez"
-msgstr ""
-
+msgstr "Select"

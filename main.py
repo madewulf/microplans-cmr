@@ -216,7 +216,7 @@ def get_translations(lang):
     return Translations.load("translations", [lang])
 
 
-def write_html(data):
+def write_html(data, lang="fr"):
     area = data.get("as")
     as_id = area.get("id")
     # Load the Jinja2 template from a separate file
@@ -225,7 +225,6 @@ def write_html(data):
     )
 
     # Example of rendering a template with French translations
-    lang = "en"
     translations = get_translations(lang)
     env.install_gettext_translations(translations)
 
@@ -276,11 +275,11 @@ def append_end(path, end_path):
     return path
 
 
-def process(as_id):
+def process(as_id, lang="fr"):
     data = get_as_info(as_id)
     # print(as_id, data.get("as").get("name"))
     create_map(data)
-    path = write_html(data)
+    path = write_html(data, lang)
     pdf_path = "generated/%s-%d.pdf" % (data.get("as").get("name"), as_id)
     end_path = "generated/microplan-%s-%d.pdf" % (data.get("as").get("name"), as_id)
     HTML(path).write_pdf(pdf_path)
@@ -314,7 +313,7 @@ def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, ite
         i += 1
 
 
-def create_excel(as_id):
+def create_excel(as_id, lang):
     data = get_as_info(as_id)
     create_map(data)
     print(data.get("as").get("name"))
@@ -351,7 +350,11 @@ def create_excel(as_id):
             .get("file_content", {})
             .get("tel_responsable_fosa", {})
         )
-
+        worksheet["J28"] = (
+            data.get("fosa_leader_instance", {})
+            .get("file_content", {})
+            .get("distance_fosa_ssd", {})
+        )
     count_fosa = len(data.get("fosas"))
     worksheet["J24"] = count_fosa
     count_localite = len(data.get("localites"))
@@ -551,13 +554,9 @@ def create_excel(as_id):
 
     columns = {
         "fosa_name": "A",
-        "diplome": "B",
+        "nom_personnel": "B",
         "grade_personnel": "C",
-        "age_personnel": "D",
-        "formation_vaccination_pratique": "E",
-        "nom_personnel": "F",
-        "responsable_fosa": "G",
-        "tel_personnel": "H",
+        "tel_personnel": "D",
     }
 
     personnels = []
@@ -568,7 +567,22 @@ def create_excel(as_id):
             personnels.append(personnel)
 
     fill_xls_with_form(
-        "6. Ressources humaines", columns, 4, "personnel_fosa", workbook, personnels
+        "6. Ressources humaines_disponib", columns, 4, "personnel_fosa", workbook, personnels
+    )
+
+    for fosa in data.get("fosas"):
+        fosa["nbre_accumulateur_glacière"] = fosa.get("cold_chain",{}).get("nbre_accumulateur_glaciere", 0) + fosa.get("cold_chain",{}).get("nbre_accumulateur_pv3", 0)
+
+    columns = {
+        "qte_ecdf": "H",
+        "qte_glaciere": "I",
+        "qte_pv": "J",
+        "nbre_accumulateur_glacière": "K",
+        "nbre_accumulateur_pv": "L",
+    }
+
+    fill_xls_with_form(
+        "7a.Chaine de Froid ", columns, 5, "cold_chain", workbook, data.get("fosas")
     )
 
     workbook.save(generated_path)
@@ -597,30 +611,32 @@ app = Flask(__name__)
 
 @app.route("/generate/<int:as_id>")
 def generate_microplan(as_id):
+    lang = request.args.get("lang", "fr")
     as_id = int(as_id)
-    pdf = process(as_id)
+    pdf = process(as_id, lang)
 
     return send_file(pdf)
 
 
 @app.route("/generate_xls/<int:as_id>")
 def generate_microplan_excel(as_id):
+    lang = request.args.get("lang", "fr")
     as_id = int(as_id)
-    excel = create_excel(as_id)
+    excel = create_excel(as_id, lang)
 
     return send_file(excel)
 
 
 @app.route("/")
 def index():
+    lang = request.args.get("lang", "fr")
     env = Environment(
         loader=FileSystemLoader("."), extensions=[i18n], undefined=SilentUndefined
     )
-    lang = "en"
     translations = get_translations(lang)
     env.install_gettext_translations(translations)
     template = env.get_template("index.html")
-    html = template.render()
+    html = template.render({"lang": lang})
     return html
 
 
