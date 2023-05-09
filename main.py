@@ -317,10 +317,10 @@ def fill_xls_with_form(columns, start_line, form_name, worksheet, items):
         i += 1
 
 
-def get_worksheet(workbook, french, english):
-    try:
+def get_worksheet(workbook, french, english, lang="fr"):
+    if lang == "fr":
         worksheet = workbook.get_sheet_by_name(french)
-    except:
+    else:
         worksheet = workbook.get_sheet_by_name(english)
     return worksheet
 
@@ -337,7 +337,8 @@ def create_excel(as_id, lang):
         workbook = openpyxl.load_workbook("Modele_microplan_AS.xlsx")
     else:
         workbook = openpyxl.load_workbook("Modele_microplan_AS_EN.xlsx")
-    worksheet = workbook.get_sheet_by_name("0_Couverture")
+
+    worksheet = get_worksheet(workbook, "0_Couverture", "0_Cover", lang)
     image_path = "generated/images/%d.png" % as_id
     if os.path.exists(image_path):
         img = openpyxl.drawing.image.Image(image_path)
@@ -387,7 +388,7 @@ def create_excel(as_id, lang):
         "tel_responsable_fosa": "I",
         "id": "J",
     }
-    worksheet = get_worksheet(workbook, "1_Liste fosa", "1_Health facilities list")
+    worksheet = get_worksheet(workbook, "1_Liste fosa", "1_Health facilities list", lang)
     fill_xls_with_form(
         columns, 4, "donnees_fosa", worksheet, data.get("fosas")
     )
@@ -524,7 +525,7 @@ def create_excel(as_id, lang):
         "id": "T",
     }
 
-    worksheet = get_worksheet(workbook, "2a_Liste localites (toutes)", "2a_Listof localities (all)")
+    worksheet = get_worksheet(workbook, "2a_Liste localites (toutes)", "2a_Listof localities (all)", lang)
     fill_xls_with_form(
         columns,
         5,
@@ -541,7 +542,7 @@ def create_excel(as_id, lang):
     }
 
     obc_form = [f for f in data.get("forms") if f.get("form_name") == "MICROPLAN - OBC"]
-    worksheet = get_worksheet(workbook, "4_Acteurs communication", "4_Communication actors")
+    worksheet = get_worksheet(workbook, "4_Acteurs communication", "4_Communication actors", lang)
     fill_xls_with_form(
         columns,
         4,
@@ -564,7 +565,7 @@ def create_excel(as_id, lang):
             personnel["fosa_name"] = fosa.get("name")
             personnels.append(personnel)
 
-    worksheet = get_worksheet(workbook, "6. Ressources humaines_disponib", "6. Available human resource ")
+    worksheet = get_worksheet(workbook, "6. Ressources humaines_disponib", "6. Available human resource ", lang)
 
     fill_xls_with_form(
         columns, 4, "personnel_fosa", worksheet, personnels
@@ -580,7 +581,7 @@ def create_excel(as_id, lang):
         "nbre_accumulateur_glacière": "K",
         "nbre_accumulateur_pv": "L",
     }
-    worksheet = get_worksheet(workbook, "7a.Chaine de Froid ", "7a.Cold chain " )
+    worksheet = get_worksheet(workbook, "7a.Chaine de Froid ", "7a.Cold chain ", lang )
     fill_xls_with_form(
          columns, 5, "cold_chain", worksheet, data.get("fosas")
     )
