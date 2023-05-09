@@ -291,8 +291,8 @@ def process(as_id, lang="fr"):
     return end_path
 
 
-def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, items):
-    worksheet = workbook.get_sheet_by_name(sheet_name)
+def fill_xls_with_form(columns, start_line, form_name, worksheet, items):
+
     i = 0
     for item in items:
 
@@ -315,6 +315,14 @@ def fill_xls_with_form(sheet_name, columns, start_line, form_name, workbook, ite
             except:
                 pass
         i += 1
+
+
+def get_worksheet(workbook, french, english):
+    try:
+        worksheet = workbook.get_sheet_by_name(french)
+    except:
+        worksheet = workbook.get_sheet_by_name(english)
+    return worksheet
 
 
 def create_excel(as_id, lang):
@@ -379,8 +387,9 @@ def create_excel(as_id, lang):
         "tel_responsable_fosa": "I",
         "id": "J",
     }
+    worksheet = get_worksheet(workbook, "1_Liste fosa", "1_Health facilities list")
     fill_xls_with_form(
-        "1_Liste fosa", columns, 4, "donnees_fosa", workbook, data.get("fosas")
+        columns, 4, "donnees_fosa", worksheet, data.get("fosas")
     )
 
     # LOCALITES
@@ -514,12 +523,13 @@ def create_excel(as_id, lang):
         "passages": "R",
         "id": "T",
     }
+
+    worksheet = get_worksheet(workbook, "2a_Liste localites (toutes)", "2a_Listof localities (all)")
     fill_xls_with_form(
-        "2a_Liste localites (toutes)",
         columns,
         5,
         "microplan",
-        workbook,
+        worksheet,
         data.get("localites"),
     )
 
@@ -531,31 +541,12 @@ def create_excel(as_id, lang):
     }
 
     obc_form = [f for f in data.get("forms") if f.get("form_name") == "MICROPLAN - OBC"]
-
+    worksheet = get_worksheet(workbook, "4_Acteurs communication", "4_Communication actors")
     fill_xls_with_form(
-        "4_Acteurs communication",
         columns,
         4,
         "file_content",
-        workbook,
-        obc_form,
-    )
-
-    columns = {
-        "type_organisation": "A",
-        "siege": "B",
-        "responsible": "C",
-        "telephone": "D",
-    }
-
-    obc_form = [f for f in data.get("forms") if f.get("form_name") == "MICROPLAN - OBC"]
-
-    fill_xls_with_form(
-        "4_Acteurs communication",
-        columns,
-        4,
-        "file_content",
-        workbook,
+        worksheet,
         obc_form,
     )
 
@@ -573,8 +564,10 @@ def create_excel(as_id, lang):
             personnel["fosa_name"] = fosa.get("name")
             personnels.append(personnel)
 
+    worksheet = get_worksheet(workbook, "6. Ressources humaines_disponib", "6. Available human resource ")
+
     fill_xls_with_form(
-        "6. Ressources humaines_disponib", columns, 4, "personnel_fosa", workbook, personnels
+        columns, 4, "personnel_fosa", worksheet, personnels
     )
 
     for fosa in data.get("fosas"):
@@ -587,9 +580,9 @@ def create_excel(as_id, lang):
         "nbre_accumulateur_glacière": "K",
         "nbre_accumulateur_pv": "L",
     }
-
+    worksheet = get_worksheet(workbook, "7a.Chaine de Froid ", "7a.Cold chain " )
     fill_xls_with_form(
-        "7a.Chaine de Froid ", columns, 5, "cold_chain", workbook, data.get("fosas")
+         columns, 5, "cold_chain", worksheet, data.get("fosas")
     )
 
     workbook.save(generated_path)
