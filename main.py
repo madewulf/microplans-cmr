@@ -90,7 +90,6 @@ def get_as_info(as_id):
     data["as"] = access_and_cache(
         "https://iaso.bluesquare.org/api/orgunits/%d/" % as_id
     )
-    reference_instance_id = data["as"]["reference_instance_id"]
 
     data["forms"] = access_and_cache(
         "https://iaso.bluesquare.org/api/instances/?orgUnitId=%d&showDeleted=false"
